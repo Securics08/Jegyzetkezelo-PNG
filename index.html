@@ -1,812 +1,525 @@
 <!DOCTYPE html>
 <html lang="hu">
-
 <head>
-  <meta charset="UTF-8">
-  <title>ULTRA-NOTE-PNG-Save_STABLE_V.119_Betűs</title>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Monoton&family=Pinyon+Script&family=Nabla&family=Bungee+Shade&family=Ewert&family=Vast+Shadow&family=Creepster&family=Lobster&family=Righteous&family=Faster+One&family=Special+Elite&family=Orbitron&family=Pacifico&family=Press+Start+2P&family=Permanent+Marker&family=Sacramento&family=Silkscreen&family=Codystar&family=Megrim&family=Fredericka+the+Great&family=UnifrakturMaguntia&family=Wallpoet&family=Syncopate&family=Fascinate+Inline&family=Nosifer&family=Rubik+Glitch&family=Bangers&family=Alumni+Sans+Inline+One&family=Iceberg&family=Glass+Antiqua&family=Kranky&family=Great+Vibes&family=Bruno+Ace+SC&family=VT323&family=Montserrat&family=Nunito&family=Oswald&family=Playfair+Display&family=Spectral&family=Ultra&family=Varela+Round&family=Alegreya&family=Roboto+Serif&family=Roboto+Mono&family=Bungee+Spice&family=Shadows+Into+Light&family=Indie+Flower&family=Dancing+Script&family=Caveat&family=Satisfy&family=Kaushan+Script&family=Yellowtail&family=Courgette&family=Amatic+SC&family=Bebas+Neue&family=Abril+Fatface&family=Patua+One&family=Fredoka+One&family=Limelight&family=Stalinist+One&family=Black+Ops+One&family=Shojumaru&family=Metal+Mania&family=Sancreek&family=Rye&family=Butcherman&family=Frijole&family=Eater&family=Aclonica&family=Michroma&family=Audiowide&family=Quantico&family=Russo+One&family=Squada+One&family=Allura&family=Alex+Brush&family=Cookie&family=Grand+Hotel&family=Parisienne&family=Rochester&family=Tangerine&family=Zeyada&family=Architects+Daughter&family=Covered+By+Your+Grace&family=Gloria+Hallelujah&family=Handlee&family=Patrick+Hand&family=Reenie+Beanie&family=Rock+Salt&family=Coming+Soon&family=Boogaloo&family=Carter+One&family=Chango&family=Cherry+Cream+Soda&family=Chewy&family=Fugaz+One&family=Luckiest+Guy&family=Titan+One&family=Yeseva+One&family=Marcellus&family=Cinzel&family=Forum&family=Cormorant+Garamond&display=swap"
-    rel="stylesheet">
-  <style>
-    body {
-      margin: 0;
-      background: #0a0a0a;
-      color: #fff;
-      font-family: Arial, sans-serif;
-      transition: background 0.3s;
-    }
-
-    .container {
-      display: flex;
-      height: 100vh;
-    }
-
-    .sidebar {
-      width: 60px;
-      background: #111;
-      padding: 10px;
-      box-sizing: border-box;
-      overflow-y: auto;
-    }
-
-    .color-btn {
-      width: 100%;
-      height: 24px;
-      margin-bottom: 6px;
-      border: none;
-      cursor: pointer;
-      outline: none;
-      border-radius: 4px;
-      box-shadow: 0 0 5px rgba(255, 255, 255, 0.3);
-    }
-
-    .main {
-      flex: 1;
-      padding: 10px;
-      box-sizing: border-box;
-      display: flex;
-      flex-direction: column;
-    }
-
-    .toolbar {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-bottom: 10px;
-      align-items: center;
-    }
-
-    .toolbar select,
-    .toolbar input,
-    .toolbar button {
-      padding: 6px;
-      border-radius: 4px;
-      border: 1px solid #333;
-      background: #111;
-      color: #fff;
-      outline: none;
-    }
-
-    body.light-mode {
-      background: #e0e0e0;
-      color: #000;
-    }
-
-    .light-mode #captureArea {
-      background: #ffffff !important;
-      border-color: #ccc;
-    }
-
-    .light-mode #editorHeader {
-      border-bottom-color: #ccc;
-      color: #000;
-    }
-
-    .light-mode .toolbar select,
-    .light-mode .toolbar input,
-    .light-mode .toolbar button {
-      background: #eee;
-      color: #000;
-      border-color: #bbb;
-    }
-
-    .light-mode .sidebar {
-      background: #d0d0d0;
-    }
-
-    #captureArea {
-      flex: 1;
-      background: #050505;
-      border: 1px solid #333;
-      border-radius: 6px;
-      display: flex;
-      flex-direction: column;
-      overflow-y: auto;
-      position: relative;
-    }
-
-    #editorHeader {
-      padding: 10px;
-      font-size: 18px;
-      min-height: 20px;
-      margin-bottom: 5px;
-      border-bottom: 1px dashed #333;
-      text-align: left;
-    }
-
-    .editor {
-      flex: 1;
-      padding: 10px;
-      overflow-y: auto;
-      font-size: 20px;
-      white-space: pre-wrap;
-      word-wrap: break-word;
-      word-break: break-word;
-      min-height: 100%;
-      outline: none;
-      line-height: 1.0 !important;
-    }
-
-    .editor div {
-      margin: 0 !important;
-      padding: 0 !important;
-      min-height: 1.0em !important;
-      line-height: 1.0 !important;
-    }
-
-    /* NEON OSZTÁLYOK */
-    .neon-black {
-      color: #000000 !important;
-      text-shadow: none !important;
-    }
-
-    .neon-orange {
-      color: #ff6600 !important;
-      text-shadow: 0 0 5px #ff6600, 0 0 10px #ff6600, 0 0 15px #ff6600, 0 0 20px #ff6600 !important;
-    }
-
-    .neon-yellow {
-      color: #ffff00 !important;
-      text-shadow: 0 0 5px #ffff00, 0 0 10px #ffff00, 0 0 15px #ffff00, 0 0 20px #ffff00 !important;
-    }
-
-    .neon-darkred {
-      color: #7a001f !important;
-      text-shadow: 0 0 5px #7a001f, 0 0 10px #7a001f, 0 0 15px #7a001f, 0 0 20px #7a001f !important;
-    }
-
-    .neon-cyan {
-      color: #00f6ff !important;
-      text-shadow: 0 0 5px #00f6ff, 0 0 10px #00f6ff, 0 0 15px #00f6ff, 0 0 20px #00f6ff !important;
-    }
-
-    .neon-blue {
-      color: #00aaff !important;
-      text-shadow: 0 0 5px #00aaff, 0 0 10px #00aaff, 0 0 15px #00aaff, 0 0 20px #00aaff !important;
-    }
-
-    .neon-deepblue {
-      color: #0080ff !important;
-      text-shadow: 0 0 5px #0080ff, 0 0 10px #0080ff, 0 0 15px #0080ff, 0 0 20px #0080ff !important;
-    }
-
-    .neon-magenta {
-      color: #ff00ff !important;
-      text-shadow: 0 0 5px #ff00ff, 0 0 10px #ff00ff, 0 0 15px #ff00ff, 0 0 20px #ff00ff !important;
-    }
-
-    .neon-pink {
-      color: #ff33ff !important;
-      text-shadow: 0 0 5px #ff33ff, 0 0 10px #ff33ff, 0 0 15px #ff33ff, 0 0 20px #ff33ff !important;
-    }
-
-    .neon-green {
-      color: #00ff00 !important;
-      text-shadow: 0 0 5px #00ff00, 0 0 10px #00ff00, 0 0 15px #00ff00, 0 0 20px #00ff00 !important;
-    }
-
-    .neon-lightgreen {
-      color: #00ff66 !important;
-      text-shadow: 0 0 5px #00ff66, 0 0 10px #00ff66, 0 0 15px #00ff66, 0 0 20px #00ff66 !important;
-    }
-
-    .neon-lime {
-      color: #33ff33 !important;
-      text-shadow: 0 0 5px #33ff33, 0 0 10px #33ff33, 0 0 15px #33ff33, 0 0 20px #33ff33 !important;
-    }
-
-    .neon-mint {
-      color: #00ff99 !important;
-      text-shadow: 0 0 5px #00ff99, 0 0 10px #00ff99, 0 0 15px #00ff99, 0 0 20px #00ff99 !important;
-    }
-
-    .neon-purple {
-      color: #8000ff !important;
-      text-shadow: 0 0 5px #8000ff, 0 0 10px #8000ff, 0 0 15px #8000ff, 0 0 20px #8000ff !important;
-    }
-
-    .neon-red {
-      color: #ff0000 !important;
-      text-shadow: 0 0 5px #ff0000, 0 0 10px #ff0000, 0 0 15px #ff0000, 0 0 20px #ff0000 !important;
-    }
-
-    .neon-white {
-      color: #ffffff !important;
-      text-shadow: 0 0 5px #ffffff, 0 0 10px #ffffff, 0 0 15px #ffffff, 0 0 20px #ffffff !important;
-    }
-
-    /* JAVÍTOTT GLOW KIKAPCSOLÓ SZABÁLY */
-    body.glow-off [class*="neon-"] {
-      text-shadow: none !important;
-    }
-
-    #glowBtn.on {
-      background: #00ff00 !important;
-      color: #000 !important;
-      font-weight: bold;
-    }
-
-    #glowBtn.off {
-      background: #ff0000 !important;
-      color: #fff !important;
-      font-weight: bold;
-    }
-
-    .editor a {
-      cursor: pointer !important;
-      text-decoration: underline !important;
-      display: inline-block;
-    }
-
-    .saved-panel {
-      width: 300px;
-      background: #222;
-      padding: 20px;
-      box-sizing: border-box;
-      display: flex;
-      flex-direction: column;
-      overflow-y: auto;
-    }
-
-    .saved-panel h3 {
-      color: #00f6ff;
-      margin-top: 0;
-    }
-
-    #savedList {
-      flex: 1;
-      overflow-y: auto;
-    }
-
-    .saved-item {
-      border-bottom: 1px solid #333;
-      padding: 6px;
-      cursor: pointer;
-    }
-
-    .label-red {
-      color: #7a001f;
-      font-weight: bold;
-    }
-
-    .label-yellow {
-      color: #ffff00;
-    }
-
-    .label-green {
-      color: #00ff00;
-    }
-
-    .label-cyan {
-      color: #00f6ff;
-    }
-
-    #storageInfo {
-      font-size: 20px;
-      margin-top: 10px;
-    }
-
-    .storage-bar-bg {
-      width: 100%;
-      height: 12px;
-      background: #333;
-      border-radius: 6px;
-      margin: 10px 0;
-      overflow: hidden;
-      border: 1px solid #444;
-    }
-
-    #storageBarFill {
-      height: 100%;
-      width: 0%;
-      transition: width 0.3s ease-in-out;
-    }
-
-    .hard-reset-btn {
-      background: #ff0000 !important;
-      color: white !important;
-      font-weight: bold;
-      cursor: pointer;
-      padding: 10px;
-      border: none;
-      border-radius: 4px;
-    }
-
-    #pdf-helper-wrap {
-      position: absolute;
-      left: -9999px;
-      top: 0;
-      width: 210mm;
-    }
-
-    .pdf-capture-node {
-      padding: 40px;
-      box-sizing: border-box;
-    }
-  </style>
+<meta charset="UTF-8">
+<title>Végtelen Jegyzet PRO - STABLE V.02 - MAGENTA</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/tesseract.js@5.1.1/dist/tesseract.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Abel&family=Abril+Fatface&family=Acme&family=Alegreya&family=Alex+Brush&family=Alfa+Slab+One&family=Alice&family=Alumni+Sans+Inline+One&family=Amatic+SC&family=Amita&family=Antic+Didone&family=Anton&family=Architects+Daughter&family=Archivo+Black&family=Are+You+Serious&family=Arima+Madurai&family=Arvo&family=Asap&family=Asset&family=Atomic+Age&family=Audiowide&family=Bangers&family=Barlow+Condensed&family=Bebas+Neue&family=Berkshire+Swash&family=Bevan&family=Bigelow+Rules&family=Black+Ops+One&family=Bonbon&family=Boogaloo&family=Bowlby+One+SC&family=Bungee+Shade&family=Butcherman&family=Cabin+Sketch&family=Caesar+Dressing&family=Carter+One&family=Caveat&family=Cinzel+Decorative&family=Codystar&family=Comfortaa&family=Coming+Soon&family=Concert+One&family=Cookie&family=Courgette&family=Creepster&family=Dancing+Script&family=Diplomata+SC&family=Domine&family=Eater&family=EB+Garamond&family=Emblema+One&family=Ewert&family=Fascinate+Inline&family=Faster+One&family=Finger+Paint&family=Flavors&family=Fontdiner+Swanky&family=Fredericka+the+Great&family=Frijole&family=Fugaz+One&family=Glass+Antiqua&family=Gloria+Hallelujah&family=Gochi+Hand&family=Great+Vibes&family=Grenze+Gotisch&family=Griffy&family=Handlee&family=Henny+Penny&family=Iceberg&family=Indie+Flower&family=Irish+Grover&family=Italianno&family=Jolly+Lodger&family=Kaushan+Script&family=Kelly+Slab&family=Kranky&family=Kumar+One&family=Lobster&family=Londrina+Shadow&family=Luckiest+Guy&family=Macondo&family=MedievalSharp&family=Megrim&family=Metal+Mania&family=Modak&family=Monoton&family=Mountains+of+Christmas&family=Mystery+Quest&family=Nabla&family=Nosifer&family=Nothing+You+Could+Do&family=Orbitron&family=Pacifico&family=Parisienne&family=Permanent+Marker&family=Pinyon+Script&family=Playfair+Display&family=Press+Start+2P&family=Righteous&family=Rubik+Glitch&family=Sacramento&family=Satisfy&family=Shadows+Into+Light&family=Silkscreen&family=Special+Elite&family=Syncopate&family=Ultra&family=UnifrakturMaguntia&family=VT323&family=Wallpoet&family=Zeyada&family=Montserrat&family=Nunito&family=Oswald&family=Spectral&family=Varela+Round&family=Roboto+Serif&family=Roboto+Mono&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0c0c0c;--panel:#141414;--text:#ddd;--border:#333;--accent:#00ff00;--val-color:#00ffff;}
+.light{--bg:#f0f0f0;--panel:#e0e0e0;--text:#111;--border:#ccc;--accent:#008800;--val-color:#0000ff;}
+body { margin: 0; font-family: Arial, sans-serif; background-color: var(--bg); color: var(--text); overflow: hidden; }
+#neon-id { color: #ff00ff; text-shadow: 0 0 5px #ff00ff, 0 0 10px #ff00ff, 0 0 20px #ff00ff; font-weight: bold; font-family: 'Orbitron', sans-serif; padding: 0 25px; font-size: 24px; }
+.color-green { color: #55ff55 !important; }
+.color-cyan { color: #55ffff !important; }
+.color-red { color: #ff5555 !important; }
+.zenburn-mode .token-section { color: #8cd0d3 !important; font-weight: bold; }
+.zenburn-mode .token-key { color: #f0ef9d !important; }
+.zenburn-mode .token-comment { color: #7f9f7f !important; font-style: italic; }
+.danger-reset { color: #ff0000 !important; border: 2px solid #ff0000 !important; font-weight: bold !important; }
+.success-import { color: #00ff00 !important; border: 2px solid #00ff00 !important; font-weight: bold !important; }
+#topbar{display:flex;flex-wrap:wrap;gap:5px;padding:10px;background:var(--panel);border-bottom:1px solid var(--border);align-items:center;}
+button,select,input{background:#000;color:var(--text);border:1px solid var(--border);padding:8px 12px;border-radius:4px;cursor:pointer;font-family:inherit;font-size:14px;display:inline-flex;align-items:center;gap:6px;}
+#notes { font-weight: bold; width: 220px; color: #00ff00; }
+#container { position: relative; width: 100vw; height: calc(100vh - 160px); background: rgba(0,0,0,0.8); overflow: hidden; }
+#editor, #highlight { position: absolute; top: 0; left: 0; width: 100%; height: 100%; padding: 20px; box-sizing: border-box; border: none; outline: none; line-height: 1.5; font-size: 25px; white-space: pre-wrap; word-wrap: break-word; margin: 0; overflow-y: auto; font-family: Arial, sans-serif; }
+#editor { background: transparent; color: transparent; caret-color: white; z-index: 2; resize: none; -webkit-text-fill-color: transparent; }
+#highlight { z-index: 1; pointer-events: none; color: inherit; }
+#stats{position:fixed;bottom:10px;right:20px;font-family:'VT323';font-size:18px;color:var(--accent);pointer-events:none;}
+.group{display:flex;align-items:center;gap:6px;border-right:1px solid var(--border);padding-right:8px;margin-right:4px;}
+#html-overlay { display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:#f1f1f1; z-index:1000; flex-direction:column; color: #333; }
+.html-header { background:#fff; padding:10px 20px; display:flex; align-items:center; justify-content:space-between; border-bottom:1px solid #ddd; }
+.html-main { display:flex; flex:1; position:relative; overflow:hidden; background:#e5e5e5; }
+.html-pane { background:white; display:flex; flex-direction:column; overflow:hidden; min-width:100px; }
+.html-resizer { width:10px; cursor:col-resize; background:#e5e5e5; }
+.html-resizer:hover { background:#ccc; }
+#htmlCode { width:100%; height:100%; border:none; padding:15px; font-family:monospace; font-size:15px; resize:none; outline:none; }
+#resultFrame { width:100%; height:100%; border:none; background:white; }
+.close-html { background:#ff5555; color:white; border:none; padding:5px 15px; cursor:pointer; font-weight:bold; }
+/* GTA 5% ES FOTO FORDITO STILUSOK - JAVITOTT GORGETHETO ES BEZARHATO */
+#ocr-overlay, #gta-overlay { display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.92); z-index:3000; justify-content:center; align-items:flex-start; overflow-y:auto; padding:20px 0; }
+.modal-box { background:#141414; border:2px solid #00ff00; padding:20px; border-radius:10px; width:700px; max-width:95%; color:#ddd; box-shadow:0 0 30px rgba(0,255,0,0.5); max-height:92vh; overflow-y:auto; display:flex; flex-direction:column; }
+.ocr-dropzone { border:2px dashed #00ff00; padding:18px; text-align:center; margin:12px 0; border-radius:8px; cursor:pointer; background:#000; display:flex; flex-direction:column; align-items:center; justify-content:center; min-height:120px; flex-shrink:0; }
+.ocr-dropzone:hover { background:#0a1a0a; }
+.ocr-preview { max-width:100%; max-height:180px; margin-top:10px; display:none; border:2px solid #333; border-radius:6px; object-fit:contain; }
+#ocr-status { font-weight:bold; color:#00ffff; margin-top:10px; text-align:center; min-height:24px; font-size:14px; flex-shrink:0; }
+.result-box { display:flex; gap:12px; margin-top:12px; flex-shrink:0; max-height:260px; overflow-y:auto; }
+.result-box div { flex:1; background:#000; border:1px solid #333; padding:10px; border-radius:6px; min-height:80px; font-size:13px; white-space:pre-wrap; line-height:1.4; overflow-y:auto; max-height:240px; }
+.modal-footer { position:sticky; bottom:0; background:#141414; padding-top:12px; margin-top:10px; border-top:1px solid #333; display:flex; gap:10px; justify-content:flex-end; flex-shrink:0; z-index:10; }
+.gta-percent-btn { background:linear-gradient(135deg,#ffcc00,#ff8800) !important; color:#000 !important; font-weight:bold !important; border:2px solid #ffcc00 !important; font-size:14px !important; }
+.gta-percent-btn:hover { transform:scale(1.05); }
+</style>
 </head>
+<body class="zenburn-mode">
 
-<body>
-  <div class="container">
-    <div class="sidebar">
-      <div style="text-align:center;font-size:12px;margin-bottom:8px;">Neon<br>Színek</div>
-      <button class="color-btn" style="background:#000000; border:1px solid #555;"
-        onmousedown="applyColorAndSet(event, 'neon-black')"></button>
-      <button class="color-btn" style="background:#ff6600"
-        onmousedown="applyColorAndSet(event, 'neon-orange')"></button>
-      <button class="color-btn" style="background:#ffff00"
-        onmousedown="applyColorAndSet(event, 'neon-yellow')"></button>
-      <button class="color-btn" style="background:#7a001f"
-        onmousedown="applyColorAndSet(event, 'neon-darkred')"></button>
-      <button class="color-btn" style="background:#00f6ff" onmousedown="applyColorAndSet(event, 'neon-cyan')"></button>
-      <button class="color-btn" style="background:#00aaff" onmousedown="applyColorAndSet(event, 'neon-blue')"></button>
-      <button class="color-btn" style="background:#0080ff"
-        onmousedown="applyColorAndSet(event, 'neon-deepblue')"></button>
-      <button class="color-btn" style="background:#ff00ff"
-        onmousedown="applyColorAndSet(event, 'neon-magenta')"></button>
-      <button class="color-btn" style="background:#ff33ff" onmousedown="applyColorAndSet(event, 'neon-pink')"></button>
-      <button class="color-btn" style="background:#00ff00" onmousedown="applyColorAndSet(event, 'neon-green')"></button>
-      <button class="color-btn" style="background:#00ff66"
-        onmousedown="applyColorAndSet(event, 'neon-lightgreen')"></button>
-      <button class="color-btn" style="background:#33ff33" onmousedown="applyColorAndSet(event, 'neon-lime')"></button>
-      <button class="color-btn" style="background:#00ff99" onmousedown="applyColorAndSet(event, 'neon-mint')"></button>
-      <button class="color-btn" style="background:#8000ff"
-        onmousedown="applyColorAndSet(event, 'neon-purple')"></button>
-      <button class="color-btn" style="background:#ff0000" onmousedown="applyColorAndSet(event, 'neon-red')"></button>
-      <button class="color-btn" style="background:#ffffff" onmousedown="applyColorAndSet(event, 'neon-white')"></button>
+<div id="topbar">
+    <div id="neon-id">Securics-08-TXT-Save_STABLE_V.02</div> 
+    
+    <div class="group">
+        <select id="notes" onchange="switchNote()"></select> <button onclick="newNote()">+ Új</button> 
     </div>
-    <div class="main">
-      <div
-        style="background: #1a1a1a; padding: 10px; border-radius: 8px; border: 1px solid #444; margin-bottom: 10px; display: flex; align-items: center; justify-content: space-between;">
-        <div class="neon-magenta" style="font-weight: bold; font-size: 25px; font-family: 'Orbitron', sans-serif;">
-          Securics-911-PNG-Save_STABLE_V.121_Betűs</div>
-        <button class="hard-reset-btn" onclick="hardReset()">VÉSZHELYZETI RESET (MEMÓRIA ÜRÍTÉS)</button>
-      </div>
-      <div class="toolbar">
-        <label>Betűtípus:</label>
-        <select id="fontSelect" onchange="setFont()">
-          <option value="Arial" style="color:#ffffff; font-family:'Arial';">1. Arial (Alap)</option>
-          <option value="Montserrat" style="color:#00ffcc; font-family:'Montserrat';">2. Montserrat</option>
-          <option value="Nunito" style="color:#ffccff; font-family:'Nunito';">3. Nunito</option>
-          <option value="Oswald" style="color:#ff6600; font-family:'Oswald';">4. Oswald</option>
-          <option value="Playfair Display" style="color:#ffff99; font-family:'Playfair Display';">5. Playfair Display
-          </option>
-          <option value="Spectral" style="color:#99ff99; font-family:'Spectral';">6. Spectral</option>
-          <option value="Ultra" style="color:#ff3333; font-family:'Ultra';">7. Ultra (Vastag)</option>
-          <option value="Varela Round" style="color:#66ccff; font-family:'Varela Round';">8. Varela Round</option>
-          <option value="Alegreya" style="color:#ff9900; font-family:'Alegreya';">9. Alegreya</option>
-          <option value="Roboto Serif" style="color:#cccccc; font-family:'Roboto Serif';">10. Roboto Serif</option>
-          <option value="Roboto Mono" style="color:#00ff00; font-family:'Roboto Mono';">11. Roboto Mono</option>
-          <option value="Orbitron" style="color:#00f6ff; font-family:'Orbitron';">12. Orbitron (Sci-fi Neon)</option>
-          <option value="Special Elite" style="color:#ffd700; font-family:'Special Elite';">13. Gépelés (Írógép)
-          </option>
-          <option value="VT323" style="color:#00ff00; font-family:'VT323';">14. Terminal (Mátrix)</option>
-          <option value="Press Start 2P" style="color:#ffff00; font-family:'Press Start 2P';">15. 8-Bit (Retro)</option>
-          <option value="Monoton" style="color:#ff00ff; font-family:'Monoton';">16. MONOTON (Neon)</option>
-          <option value="Pinyon Script" style="color:#00ff99; font-family:'Pinyon Script';">17. Pinyon (Kézírás)
-          </option>
-          <option value="Creepster" style="color:#ff0000; font-family:'Creepster';">18. Horror (Creep)</option>
-          <option value="Nabla" style="color:#ff6600; font-family:'Nabla';">19. Nabla (3D Színes)</option>
-          <option value="Lobster" style="color:#00f6ff; font-family:'Lobster';">20. Lobster</option>
-          <option value="Righteous" style="color:#ffff00; font-family:'Righteous';">21. Righteous</option>
-          <option value="Bungee Shade" style="color:#ff33ff; font-family:'Bungee Shade';">22. Bungee (Árnyas)</option>
-          <option value="Faster One" style="color:#00ff00; font-family:'Faster One';">23. Faster (Száguldó)</option>
-          <option value="Ewert" style="color:#8000ff; font-family:'Ewert';">24. Ewert (Különleges)</option>
-          <option value="Vast Shadow" style="color:#ffffff; font-family:'Vast Shadow';">25. Vast Shadow</option>
-          <option value="Permanent Marker" style="color:#ff6600; font-family:'Permanent Marker';">26. Filctoll (Vastag)
-          </option>
-          <option value="Sacramento" style="color:#ff99cc; font-family:'Sacramento';">27. Sacramento (Folyó)</option>
-          <option value="Silkscreen" style="color:#33ff33; font-family:'Silkscreen';">28. Pixel (Tiszta)</option>
-          <option value="Codystar" style="color:#00ffff; font-family:'Codystar';">29. Codystar (Pontok)</option>
-          <option value="Megrim" style="color:#ffcc00; font-family:'Megrim';">30. Megrim (Elvont)</option>
-          <option value="UnifrakturMaguntia" style="color:#7a001f; font-family:'UnifrakturMaguntia';">31. Gótikus (Old)
-          </option>
-          <option value="Wallpoet" style="color:#0080ff; font-family:'Wallpoet';">32. Graffiti</option>
-          <option value="Syncopate" style="color:#00ff99; font-family:'Syncopate';">33. Techno</option>
-          <option value="Nosifer" style="color:#ff0000; font-family:'Nosifer';">34. Vérző (Folyékony)</option>
-          <option value="Rubik Glitch" style="color:#ffff00; font-family:'Rubik Glitch';">35. Glitch (Hiba)</option>
-          <option value="Bangers" style="color:#00aaff; font-family:'Bangers';">36. Pop Art</option>
-          <option value="Pacifico" style="color:#ff33ff; font-family:'Pacifico';">37. Pacifico</option>
-          <option value="Great Vibes" style="color:#ff99cc; font-family:'Great Vibes';">38. Great Vibes</option>
-          <option value="Bruno Ace SC" style="color:#00f6ff; font-family:'Bruno Ace SC';">39. Bruno Ace</option>
-          <option value="Fascinate Inline" style="color:#ff00ff; font-family:'Fascinate Inline';">40. Fascinate</option>
-          <option value="Fredericka the Great" style="color:#ffffff; font-family:'Fredericka the Great';">41. Vázlatos
-          </option>
-          <option value="Courier New" style="color:#ff00ff; font-family:'Courier New';">42. Courier</option>
-          <option value="Bungee Spice" style="color:#ff6600; font-family:'Bungee Spice';">43. Spice (3D)</option>
-          <option value="Shadows Into Light" style="color:#00ff00; font-family:'Shadows Into Light';">44. Shadows
-          </option>
-          <option value="Indie Flower" style="color:#00f6ff; font-family:'Indie Flower';">45. Indie Flower</option>
-          <option value="Dancing Script" style="color:#ffcc00; font-family:'Dancing Script';">46. Dancing</option>
-          <option value="Caveat" style="color:#7a001f; font-family:'Caveat';">47. Caveat</option>
-          <option value="Satisfy" style="color:#00aaff; font-family:'Satisfy';">48. Satisfy</option>
-          <option value="Kaushan Script" style="color:#0080ff; font-family:'Kaushan Script';">49. Kaushan</option>
-          <option value="Yellowtail" style="color:#ff00ff; font-family:'Yellowtail';">50. Yellowtail</option>
-          <option value="Courgette" style="color:#ff33ff; font-family:'Courgette';">51. Courgette</option>
-          <option value="Amatic SC" style="color:#00ff66; font-family:'Amatic SC';">52. Amatic</option>
-          <option value="Bebas Neue" style="color:#33ff33; font-family:'Bebas Neue';">53. Bebas</option>
-          <option value="Abril Fatface" style="color:#00ff99; font-family:'Abril Fatface';">54. Abril</option>
-          <option value="Patua One" style="color:#8000ff; font-family:'Patua One';">55. Patua</option>
-          <option value="Fredoka One" style="color:#ff0000; font-family:'Fredoka One';">56. Fredoka</option>
-          <option value="Limelight" style="color:#ffffff; font-family:'Limelight';">57. Limelight</option>
-          <option value="Stalinist One" style="color:#ff6600; font-family:'Stalinist One';">58. Stalinist</option>
-          <option value="Black Ops One" style="color:#00ff00; font-family:'Black Ops One';">59. Black Ops</option>
-          <option value="Shojumaru" style="color:#00f6ff; font-family:'Shojumaru';">60. Shojumaru</option>
-          <option value="Metal Mania" style="color:#ffff00; font-family:'Metal Mania';">61. Metal Mania</option>
-          <option value="Sancreek" style="color:#7a001f; font-family:'Sancreek';">62. Sancreek</option>
-          <option value="Rye" style="color:#00aaff; font-family:'Rye';">63. Rye</option>
-          <option value="Butcherman" style="color:#0080ff; font-family:'Butcherman';">64. Butcher</option>
-          <option value="Frijole" style="color:#ff00ff; font-family:'Frijole';">65. Frijole</option>
-          <option value="Eater" style="color:#ff33ff; font-family:'Eater';">66. Eater</option>
-          <option value="Aclonica" style="color:#00ff66; font-family:'Aclonica';">67. Aclonica</option>
-          <option value="Michroma" style="color:#33ff33; font-family:'Michroma';">68. Michroma</option>
-          <option value="Audiowide" style="color:#00ff99; font-family:'Audiowide';">69. Audiowide</option>
-          <option value="Quantico" style="color:#8000ff; font-family:'Quantico';">70. Quantico</option>
-          <option value="Russo One" style="color:#ff0000; font-family:'Russo One';">71. Russo</option>
-          <option value="Squada One" style="color:#ffffff; font-family:'Squada One';">72. Squada</option>
-          <option value="Allura" style="color:#ff6600; font-family:'Allura';">73. Allura</option>
-          <option value="Alex Brush" style="color:#00ff00; font-family:'Alex Brush';">74. Alex Brush</option>
-          <option value="Cookie" style="color:#00f6ff; font-family:'Cookie';">75. Cookie</option>
-          <option value="Grand Hotel" style="color:#ffff00; font-family:'Grand Hotel';">76. Grand Hotel</option>
-          <option value="Parisienne" style="color:#7a001f; font-family:'Parisienne';">77. Parisienne</option>
-          <option value="Rochester" style="color:#00aaff; font-family:'Rochester';">78. Rochester</option>
-          <option value="Tangerine" style="color:#0080ff; font-family:'Tangerine';">79. Tangerine</option>
-          <option value="Zeyada" style="color:#ff00ff; font-family:'Zeyada';">80. Zeyada</option>
-          <option value="Architects Daughter" style="color:#ff33ff; font-family:'Architects Daughter';">81. Architects
-          </option>
-          <option value="Covered By Your Grace" style="color:#00ff66; font-family:'Covered By Your Grace';">82. Grace
-          </option>
-          <option value="Gloria Hallelujah" style="color:#33ff33; font-family:'Gloria Hallelujah';">83. Gloria</option>
-          <option value="Handlee" style="color:#00ff99; font-family:'Handlee';">84. Handlee</option>
-          <option value="Patrick Hand" style="color:#8000ff; font-family:'Patrick Hand';">85. Patrick</option>
-          <option value="Reenie Beanie" style="color:#ff0000; font-family:'Reenie Beanie';">86. Reenie</option>
-          <option value="Rock Salt" style="color:#ffffff; font-family:'Rock Salt';">87. Rock Salt</option>
-          <option value="Coming Soon" style="color:#ff6600; font-family:'Coming Soon';">88. Coming Soon</option>
-          <option value="Boogaloo" style="color:#00ff00; font-family:'Boogaloo';">89. Boogaloo</option>
-          <option value="Carter One" style="color:#00f6ff; font-family:'Carter One';">90. Carter</option>
-          <option value="Chango" style="color:#ffff00; font-family:'Chango';">91. Chango</option>
-          <option value="Cherry Cream Soda" style="color:#7a001f; font-family:'Cherry Cream Soda';">92. Cherry</option>
-          <option value="Chewy" style="color:#00aaff; font-family:'Chewy';">93. Chewy</option>
-          <option value="Fugaz One" style="color:#0080ff; font-family:'Fugaz One';">94. Fugaz</option>
-          <option value="Luckiest Guy" style="color:#ff00ff; font-family:'Luckiest Guy';">95. Luckiest</option>
-          <option value="Titan One" style="color:#ff33ff; font-family:'Titan One';">96. Titan</option>
-          <option value="Yeseva One" style="color:#00ff66; font-family:'Yeseva One';">97. Yeseva</option>
-          <option value="Marcellus" style="color:#33ff33; font-family:'Marcellus';">98. Marcellus</option>
-          <option value="Cinzel" style="color:#00ff99; font-family:'Cinzel';">99. Cinzel</option>
-          <option value="Forum" style="color:#8000ff; font-family:'Forum';">100. Forum</option>
-          <option value="Cormorant Garamond" style="color:#ff0000; font-family:'Cormorant Garamond';">101. Garamond
-          </option>
-          <option value="Iceberg" style="color:#ffffff; font-family:'Iceberg';">102. Iceberg</option>
-          <option value="Glass Antiqua" style="color:#ff6600; font-family:'Glass Antiqua';">103. Glass</option>
-          <option value="Kranky" style="color:#00ff00; font-family:'Kranky';">104. Kranky</option>
-          <option value="Alumni Sans Inline One" style="color:#00f6ff; font-family:'Alumni Sans Inline One';">105.
-            Alumni</option>
-          <option value="Rubik Glitch" style="color:#ffff00; font-family:'Rubik Glitch';">106. Glitch 2</option>
-          <option value="Times New Roman" style="color:#7a001f; font-family:'Times New Roman';">107. Times</option>
-          <option value="Georgia" style="color:#00aaff; font-family:'Georgia';">108. Georgia</option>
-          <option value="Impact" style="color:#0080ff; font-family:'Impact';">109. Impact</option>
-          <option value="Comic Sans MS" style="color:#ff00ff; font-family:'Comic Sans MS';">110. Comic Sans</option>
-          <option value="Verdana" style="color:#ff33ff; font-family:'Verdana';">111. Verdana</option>
-          <option value="Trebuchet MS" style="color:#00ff66; font-family:'Trebuchet MS';">112. Trebuchet</option>
-          <option value="Garamond" style="color:#33ff33; font-family:'Garamond';">113. Garamond Old</option>
-          <option value="Bookman" style="color:#00ff99; font-family:'Bookman';">114. Bookman</option>
-          <option value="Palatino" style="color:#8000ff; font-family:'Palatino';">115. Palatino</option>
-          <option value="Candara" style="color:#ff0000; font-family:'Candara';">116. Candara</option>
-          <option value="Geneva" style="color:#ffffff; font-family:'Geneva';">117. Geneva</option>
-          <option value="Optima" style="color:#ff6600; font-family:'Optima';">118. Optima</option>
-          <option value="Tahoma" style="color:#00ff00; font-family:'Tahoma';">119. Tahoma (Vége)</option>
-          <option value="Comic Sans MS Bold" style="color:#ff00ff; font-family:'Comic Sans MS'; font-weight:bold;">120.
-            Comic Sans Bold</option>
-          <option value="Verdana Bold" style="color:#ff33ff; font-family:'Verdana'; font-weight:bold;">121. Verdana Bold
-          </option>
-        </select>
-        <label>Méret:</label>
-        <input type="range" id="sizeRange" min="8" max="250" value="20" oninput="setSize(this.value)"> <span
-          id="sizeValue">20</span>px
-        <button onclick="resetColor()">Reset szín</button>
-        <button id="glowBtn" class="on" onclick="toggleGlow()">Glow ON</button>
-        <button onclick="toggleTheme()">🌓 Sötétítő</button>
-        <input type="text" id="linkInput" placeholder="Link..." />
-        <button onclick="insertLink()">Beszúrás</button>
-        <button onclick="newNote()">+ Új lap</button>
-      </div>
-      <div class="toolbar">
-        <button onclick="loadNote()">Betöltés</button> <button onclick="saveNote()">MENTÉS (.JSON)</button> <button
-          onclick="deleteNote()">Törlés</button> <button onclick="exportNotes()">EXPORT (ÖSSZES)</button>
-        <input type="file" id="importInput" style="display:none" onchange="processImport(event)" accept=".json">
-        <button onclick="document.getElementById('importInput').click()">Import (.json)</button>
-        <button onclick="downloadPNG(false)">PNG fekete</button> <button onclick="downloadPNG(true)">PNG
-          átlátszó</button>
-        <button onclick="downloadPDF(false)">PDF FF</button> <button onclick="downloadPDF(true)"
-          style="background:#7a001f">PDF Színes</button>
-        <button onclick="insertHTMLPrompt()" style="background:#0055ff; border-color:#00f6ff">HTML BEILLESZTÉS</button>
-      </div>
-      <div id="savePath" style="margin-top:6px; font-family: 'Courier New', monospace; line-height: 1.6;">
-        <div><span class="label-red">Mentés helye:</span> <span class="label-yellow">Letöltések mappa</span></div>
-        <div id="lastFileDisplay"><span class="label-red">Utolsó fájl:</span> <span class="label-green">Nincs
-            mentés</span></div>
-        <div id="timeDisplay"><span class="label-red">Időpont:</span> <span class="label-cyan">--:--:--</span></div>
-        <div id="freeMemoryDisplay"><span class="label-red">Szabad memória:</span> <span class="label-cyan"></span>
+
+    <div class="group">
+        <button onclick="openHtmlEditor()" class="color-cyan">🛠 HTML Szerkesztő</button> 
+        <button onclick="insertTimestamp()" class="color-red">📅 Dátum</button>
+        <button onclick="openGtaModal()" class="gta-percent-btn">🎮 GTA 5% MENÜ - FOTO FORDITO</button>
+    </div>
+
+    <div class="group">
+        <select id="fontFamily" onchange="changeFont()"></select> 
+        <input type="number" id="fontSize" value="25" min="8" max="150" style="width:60px" oninput="changeSize()"> 
+        <button onclick="toggleBold()" class="color-green"><b>B</b></button> 
+        <button onclick="toggleItalic()" class="color-cyan"><i>/</i></button> 
+        <button onclick="toggleUnderline()" class="color-red"><u>U</u></button> 
+    </div>
+
+    <div class="group">
+        <input type="color" id="textColor" value="#eeeeee" oninput="updateStyles()"> 
+        <input type="color" id="bgColor" value="#000000" oninput="updateStyles()"> 
+        <input type="range" id="opacity" min="0" max="1" step="0.1" value="0.7" style="width:100px" oninput="updateStyles()"> 
+        <button onclick="speakText()">🔊</button> <button onclick="stopSpeak()" style="background:#800000; color:white">■</button> 
+        <button onclick="setZenburn(true)">🎨 Z</button> <button onclick="setZenburn(false)">⚪ N</button> 
+    </div>
+
+    <div class="group">
+        <select id="transDir">
+            <option value="hu|en">Magyar ➡ Angol</option>
+            <option value="en|hu">Angol ➡ Magyar</option>
+        </select> <button onclick="translateText()" class="color-green">🌐 Fordítás</button> 
+        <button onclick="openOcrModal()" class="color-cyan" style="border-color:#00ffff;">📷 Képfordító MAGYARRA</button>
+    </div>
+
+    <div class="group">
+        <button onclick="exportJSON()">✉ Küldés</button> <button onclick="toggleDark()">🌗 Mód</button> <button onclick="undo()">⬅ Vissza</button> <button onclick="redo()">➡ Előre</button> 
+    </div>
+
+    <div class="group">
+        <button onclick="importFiles()" class="success-import">📁 Import</button> <button onclick="saveIni()" style="color:#ffcc00">📜 INI</button> <button onclick="downloadPDF()" style="color:#ff5555">📄 PDF</button> <button onclick="downloadTxt()" style="color:#ff55ff">⬇ TXT</button> <button onclick="downloadAllZip()" style="color:#55ff55">📦 ZIP</button> 
+    </div>
+
+    <div class="group">
+        <button onclick="deleteCurrent()" class="color-red">🗑 Töröl</button> <button onclick="resetApp()" class="danger-reset">⚠ RESET</button> 
+    </div>
+
+    <input id="search" placeholder="Keresés..." oninput="searchText()"> 
+</div>
+
+<div id="container">
+    <div id="highlight"></div> <textarea id="editor" spellcheck="false" oninput="handleInput()" onpaste="handlePaste()" onscroll="syncScroll()" placeholder="Írj ide..."></textarea> 
+</div>
+<div id="stats">Szavak: <span id="wCount">0</span> | Karakterek: <span id="cCount">0</span></div> 
+
+<div id="html-overlay">
+    <div class="html-header">
+        <div style="display:flex; gap:10px;">
+            <button style="background:#04AA6D; color:white;" onclick="runCode()">Fuss &gt;</button>
+            <button style="background:#f44336; color:white;" onclick="clearCode()">Törlés</button>
         </div>
-      </div>
-      <div id="storageInfo"></div>
-      <div class="storage-bar-bg">
-        <div id="storageBarFill"></div>
-      </div>
-      <div id="captureArea">
-        <div id="editorHeader" contenteditable="true"></div>
-        <div id="editor" class="editor" contenteditable="true"></div>
-      </div>
+        <div style="font-weight:bold;">Interaktív HTML Szerkesztő</div>
+        <button class="close-html" onclick="closeHtmlEditor()">X Bezárás</button>
     </div>
-    <div class="saved-panel">
-      <h3>Mentett jegyzetek</h3>
-      <div id="savedList"></div> <button class="clear-btn" onclick="clearList()"
-        style="background:#7a001f; color:white; border:1px solid red; padding:10px; cursor:pointer;">Lista
-        ürítése</button>
+    <div class="html-main" id="htmlContainer">
+        <div class="html-pane" id="leftPane" style="width:50%;">
+            <div style="background:#f8f8f8; padding:5px; font-size:12px; border-bottom:1px solid #eee;">FORRÁSKÓD</div>
+            <textarea id="htmlCode" spellcheck="false" oninput="saveHtmlCode()"></textarea>
+        </div>
+        <div class="html-resizer" id="dragBar"></div>
+        <div class="html-pane" id="rightPane" style="flex:1;">
+            <div style="background:#f8f8f8; padding:5px; font-size:12px; border-bottom:1px solid #eee;">EREDMÉNY</div>
+            <iframe id="resultFrame"></iframe>
+        </div>
     </div>
-  </div>
-  <div id="pdf-helper-wrap"></div>
-  <script>
-    const editor = document.getElementById("editor"); const editorHeader = document.getElementById("editorHeader"); const captureArea = document.getElementById("captureArea"); const savedList = document.getElementById("savedList"); const storageInfo = document.getElementById("storageInfo"); const storageBarFill = document.getElementById("storageBarFill"); const linkInput = document.getElementById("linkInput"); const glowBtn = document.getElementById("glowBtn"); const lastFileDisplay = document.getElementById("lastFileDisplay"); const timeDisplay = document.getElementById("timeDisplay"); let activeColorClass = "neon-white"; let glowOn = true; let notes = [];
-    let db;
+</div>
 
-    activeColorClass = localStorage.getItem("selectedNeonColor") || "neon-white";
+<!-- GTA 5% MENU + FOTO FORDITO MODALOK - BEÉPÍTVE AZ EREDETI KODBA -->
+<div id="ocr-overlay">
+    <div class="modal-box">
+        <div style="display:flex; justify-content:space-between; align-items:center;">
+            <h3 style="margin:0; color:#00ff00;">📷 Fényképen lévő szöveg ➜ MAGYARRA fordítás</h3>
+            <button onclick="closeOcrModal()" style="background:#800000;color:white;padding:6px 14px;font-weight:bold;border:none;border-radius:4px;cursor:pointer;">X</button>
+        </div>
+        <p style="font-size:13px; color:#aaa; margin:8px 0;">Töltsd fel a GTA képedet (pl. <i>20260811174817_1.jpg</i>) vagy másold be <b>Ctrl+V</b>-vel. A program kiolvassa az angol szöveget és <b style="color:#ffff00;">AUTOMATIKUSAN magyarra fordítja!</b></p>
+        <div class="ocr-dropzone" id="ocr-dropzone" onclick="document.getElementById('ocr-file').click()">
+            <span style="font-size:16px; font-weight:bold;">📁 Kattints vagy húzd ide a képet / Ctrl+V beillesztés</span>
+            <small style="color:#888; margin-top:6px;">A képen lévő szöveget magyarra fordítja - pl. GTA 5 Impromptu Race</small>
+            <input type="file" id="ocr-file" accept="image/*" style="display:none" onchange="handleOcrFile(this.files[0])">
+            <img id="ocr-img-preview" class="ocr-preview">
+        </div>
+        <div id="ocr-status">Várakozás képre... Illeszd be a GTA screenshotot!</div>
+        <div class="result-box" id="result-box" style="display:none;">
+            <div><strong style="color:#888;">🔤 EREDETI (fényképről):</strong><br><br><span id="ocr-original"></span></div>
+            <div style="border-color:#00ff00; background:#001a00;"><strong style="color:#00ff00;">🇭🇺 MAGYAR FORDÍTÁS:</strong><br><br><span id="ocr-translated" style="font-weight:bold; color:#ffff55; font-size:15px;"></span></div>
+        </div>
+        <div class="modal-footer">
+            <button onclick="applyTranslation()" style="background:#00aa00; color:white; font-weight:bold; display:none; font-size:14px; padding:10px 18px; border:none; border-radius:4px; cursor:pointer;" id="btn-apply">✅ Beszúrás jegyzetbe</button>
+            <button onclick="closeOcrModal()" style="padding:10px 18px; background:#333; color:white; border:1px solid #666; border-radius:4px; cursor:pointer; font-weight:bold;">Bezárás</button>
+        </div>
+    </div>
+</div>
 
+<div id="gta-overlay">
+    <div class="modal-box" style="border-color:#ffcc00; box-shadow:0 0 25px rgba(255,204,0,0.4);">
+        <div style="display:flex; justify-content:space-between; align-items:center;">
+            <h3 style="margin:0; color:#ffcc00;">🎮 GTA 5% MENÜ - Fénykép Fordító Modul</h3>
+            <button onclick="closeGtaModal()" style="background:#800000;color:white;padding:6px 14px;font-weight:bold;border:none;border-radius:4px;cursor:pointer;">X</button>
+        </div>
+        <p style="font-size:13px; color:#aaa; margin-top:12px;">Ez a menü a <b>fényképen található szöveget</b> fordítja magyarra! A te képed példájával:</p>
+        <div style="background:#000; padding:14px; border:1px solid #333; font-size:13px; border-radius:6px;">
+            <div style="display:flex; gap:15px;">
+                <div style="flex:1;"><strong style="color:#888;">Fényképről:</strong><br><i style="color:#ccc;">You can challenge another player to an Impromptu Race using the Interaction Menu.</i></div>
+                <div style="flex:1; border-left:1px solid #333; padding-left:12px;"><strong style="color:#00ff00;">Magyarul:</strong><br><b style="color:#ffff55;">Kihívhatsz egy másik játékost egy rögtönzött versenyre az Interakciós menü segítségével.</b></div>
+            </div>
+        </div>
+        <div style="background:#111; padding:12px; border:1px solid #444; font-size:12px; border-radius:6px; margin-top:12px;">
+            <strong style="color:#ffcc00;">GTA 5% Python Bot funkciók:</strong><br>
+            • <code>CTRL+ALT+G</code>: Képernyőfotó + kijelölés + azonnal magyar fordítás (nem nyit térképet!)<br>
+            • <code>CTRL+ALT+B</code>: AFK Bot (Random Walk) a kidobás ellen<br>
+            • Fotós módszer: a képernyőfotón jelölsz, ezért a GTA nem kapja meg a kattintást
+        </div>
+        <div style="display:flex; gap:10px; margin-top:18px; justify-content:space-between;" class="modal-footer">
+            <button onclick="openOcrModal(); closeGtaModal();" style="background:#00aa00; color:#fff; font-weight:bold; padding:10px 16px; border:none; border-radius:4px; cursor:pointer;">📷 Kép feltöltés + Magyar fordítás</button>
+            <div style="display:flex; gap:8px;">
+                <button onclick="downloadGtaBotScript()" style="background:#ffcc00; color:#000; font-weight:bold; padding:10px 16px; border:none; border-radius:4px; cursor:pointer;">⬇ Python Bot (.py) letöltése</button>
+                <button onclick="closeGtaModal()" style="padding:10px 16px; background:#333; color:white; border:1px solid #666; border-radius:4px; cursor:pointer; font-weight:bold;">Bezárás</button>
+            </div>
+        </div>
+    </div>
+</div>
 
-    // Keresd meg ezt a részt és írd át így:
-    window.addEventListener("load", () => {
-      const savedColor = localStorage.getItem("selectedNeonColor");
-      console.log(savedColor)
+<script>
+const rawFonts = ["Abel","Abril Fatface","Acme","Alegreya","Alex Brush","Alfa Slab One","Alice","Alumni Sans Inline One","Amatic SC","Amita","Antic Didone","Anton","Architects Daughter","Archivo Black","Are You Serious","Arial","Arima Madurai","Arvo","Asap","Asset","Atomic Age","Audiowide","Bangers","Barlow Condensed","Bebas Neue","Berkshire Swash","Bevan","Bigelow Rules","Black Ops One","Bonbon","Boogaloo","Bowlby One SC","Bungee Shade","Butcherman","Cabin Sketch","Caesar Dressing","Carter One","Caveat","Cinzel Decorative","Codystar","Comfortaa","Coming Soon","Concert One","Cookie","Courgette","Creepster","Dancing Script","Diplomata SC","Domine","Eater","EB Garamond","Emblema One","Ewert","Fascinate Inline","Faster One","Finger Paint","Flavors","Fontdiner Swanky","Fredericka the Great","Frijole","Fugaz One","Glass Antiqua","Gloria Hallelujah","Gochi Hand","Great Vibes","Grenze Gotisch","Griffy","Handlee","Henny Penny","Iceberg","Indie Flower","Irish Grover","Italianno","Jolly Lodger","Kaushan Script","Kelly Slab","Kranky","Kumar One","Lobster","Londrina Shadow","Luckiest Guy","Macondo","MedievalSharp","Megrim","Metal Mania","Modak","Monoton","Mountains of Christmas","Mystery Quest","Nabla","Nosifer","Nothing You Could Do","Orbitron","Pacifico","Parisienne","Permanent Marker","Pinyon Script","Playfair Display","Press Start 2P","Righteous","Rubik Glitch","Sacramento","Satisfy","Shadows Into Light","Silkscreen","Special Elite","Syncopate","Ultra","UnifrakturMaguntia","VT323","Wallpoet","Zeyada","Montserrat","Nunito","Oswald","Spectral","Varela Round","Roboto Serif","Roboto Mono"];
+const fontColors = ["#ff5555", "#55ff55", "#5555ff", "#ffff55", "#ff55ff", "#55ffff", "#ffaa00", "#ff00aa", "#aa00ff", "#00ffaa"];
 
-      if (savedColor) {
-        activeColorClass = savedColor;
-        applyColorAndSet(null, activeColorClass)
-        // Opcionális: itt beállíthatnál egy vizuális visszajelzést is a gombokon
-      } else {
-        activeColorClass = "neon-white"; // Alapértelmezett, ha nincs mentve semmi
-      }
-    });
+let db; let notes = {}; let current = "";
+const request = indexedDB.open("NotesUltraDB", 1);
+request.onupgradeneeded = e => { db = e.target.result; db.createObjectStore("notes"); };
+request.onsuccess = e => { db = e.target.result; loadFromDB(); };
 
-    const dbRequest = indexedDB.open("NeonNotesDB", 1);
-    dbRequest.onupgradeneeded = e => { db = e.target.result; db.createObjectStore("notes", { keyPath: "id", autoIncrement: true }); };
-    dbRequest.onsuccess = e => { db = e.target.result; loadFromDB(); };
-
-    function getFormattedTimestamp() {
-      const now = new Date();
-      return `${now.getFullYear()}_${now.getMonth() + 1}_${now.getDate()}_${now.getHours()}-${now.getMinutes()}-${now.getSeconds()}`;
-    }
-
-    async function downloadPNG(trans) {
-      const area = document.getElementById("captureArea");
-      const header = document.getElementById("editorHeader");
-      const originalBg = area.style.background;
-      const originalBorder = area.style.border;
-      const headerBorder = header.style.borderBottom;
-      if (trans) { area.style.background = "transparent"; area.style.border = "none"; header.style.borderBottom = "none"; }
-      const canvas = await html2canvas(area, { backgroundColor: trans ? null : "#050505", scale: 2, useCORS: true, logging: false });
-      if (trans) { area.style.background = originalBg; area.style.border = originalBorder; header.style.borderBottom = headerBorder; }
-      const a = document.createElement("a");
-      a.download = `note_${getFormattedTimestamp()}.png`;
-      a.href = canvas.toDataURL("image/png");
-      a.click();
-    }
-
-    function saveNote() {
-      const currentTitle = editorHeader.innerText || "JEGYZET";
-      const name = prompt("Add meg a jegyzet nevét:", currentTitle);
-      if (!name) return;
-      const ts = getFormattedTimestamp();
-      const fileName = `${name}_PNG_Save_${ts}`;
-      const noteObj = { name: name, content: editor.innerHTML, timestamp: new Date().toLocaleString('hu-HU'), color: activeColorClass };
-      const tx = db.transaction("notes", "readwrite");
-      tx.objectStore("notes").add(noteObj);
-      tx.oncomplete = () => {
-        editorHeader.innerText = name;
-        loadFromDB();
-        downloadFile(JSON.stringify(noteObj), fileName);
-        lastFileDisplay.innerHTML = `<span class="label-red">Utolsó fájl:</span> <span class="label-green">${fileName}.json</span>`;
-        timeDisplay.innerHTML = `<span class="label-red">Időpont:</span> <span class="label-cyan">${noteObj.timestamp}</span>`;
-      };
-    }
-
-    function processImport(event) {
-      const file = event.target.files[0];
-      if (!file) return;
-      const reader = new FileReader();
-      reader.onload = e => {
-        try {
-          const importedData = JSON.parse(e.target.result);
-          const tx = db.transaction("notes", "readwrite");
-          const store = tx.objectStore("notes");
-          if (Array.isArray(importedData)) {
-            importedData.forEach(item => { delete item.id; store.add(item); });
-          } else {
-            delete importedData.id; store.add(importedData);
-          }
-          tx.oncomplete = () => { loadFromDB(); alert("Importálás sikeres!"); };
-        } catch (err) { alert("Hiba a fájl feldolgozásakor!"); }
-      };
-      reader.readAsText(file);
-    }
-
-    function exportNotes() {
-      if (notes.length === 0) { alert("Nincs mit exportálni!"); return; }
-      const name = prompt("Add meg az exportált fájl nevét:", "ÖSSZES_JEGYZET");
-      if (!name) return;
-      const ts = getFormattedTimestamp();
-      const exportFileName = `${name}_PNG_EXPORT_${ts}`;
-      downloadFile(JSON.stringify(notes), exportFileName);
-      lastFileDisplay.innerHTML = `<span class="label-red">Utolsó fájl:</span> <span class="label-green">${exportFileName}.json</span>`;
-      timeDisplay.innerHTML = `<span class="label-red">Időpont:</span> <span class="label-cyan">${new Date().toLocaleString('hu-HU')}</span>`;
-    }
-
-    function loadFromDB() {
-      const transaction = db.transaction("notes", "readonly");
-      const store = transaction.objectStore("notes");
-      const request = store.getAll();
-      request.onsuccess = () => { notes = request.result; refreshListUI(); updateStorageStatus(); };
-    }
-
-    function refreshListUI() {
-      savedList.innerHTML = "";
-      notes.forEach(note => {
-        const item = document.createElement("div");
-        item.className = "saved-item";
-        item.innerHTML = `<span class="${note.color}">${note.name}</span>`;
-        item.onclick = () => { editor.innerHTML = note.content; editorHeader.innerText = note.name; };
-        savedList.appendChild(item);
-      });
-    }
-
-    function setFont() {
-      const font = document.getElementById("fontSelect").value;
-      const isBold = font.includes("Bold");
-      const family = isBold ? font.replace(" Bold", "") : font;
-      document.execCommand('fontName', false, family);
-      if (isBold) document.execCommand('bold', false, null);
-    }
-
-    function setSize(size) {
-      document.getElementById("sizeValue").innerText = size;
-      const selection = window.getSelection();
-      if (!selection.rangeCount) return;
-      const range = selection.getRangeAt(0);
-      const span = document.createElement("span");
-      span.style.fontSize = size + "px";
-      if (range.collapsed) {
-        span.innerHTML = "&#8203;";
-        range.insertNode(span);
-        range.setStartAfter(span);
-        selection.removeAllRanges();
-        selection.addRange(range);
-      } else {
-        span.appendChild(range.extractContents());
-        range.insertNode(span);
-      }
-    }
-
-    function insertHTMLPrompt() {
-      const htmlCode = prompt("Másold be ide a beillesztendő HTML kódot:");
-      if (htmlCode) {
-        const span = document.createElement("span");
-        span.className = activeColorClass;
-        span.textContent = htmlCode;
-        editor.appendChild(span);
-        editor.appendChild(document.createElement("br"));
-        editor.scrollTop = editor.scrollHeight;
-      }
-    }
-
-    function downloadFile(content, name) {
-      const blob = new Blob([content], { type: "application/json" });
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement("a");
-      a.href = url; a.download = name + ".json";
-      document.body.appendChild(a); a.click();
-      document.body.removeChild(a); URL.revokeObjectURL(url);
-    }
-
-    function updateStorageStatus() {
-      const totalMax = 500 * 1024 * 1024;
-      let size = new Blob([JSON.stringify(notes)]).size;
-      const usedMB = (size / (1024 * 1024)).toFixed(2);
-      storageBarFill.style.width = Math.min(100, (size / totalMax) * 100) + "%";
-      document.getElementById("freeMemoryDisplay").innerHTML = `<span class="label-red">Szabad:</span> <span class="label-cyan">${(500 - usedMB).toFixed(2)} MB</span>`;
-    }
-
-    function applyColorAndSet(e, className) {
-      if (e) e.preventDefault();
-
-      activeColorClass = className;
-      localStorage.setItem("selectedNeonColor", className);
-
-      // Először fókuszáljunk az editorra, ha nem ott lennénk
-      editor.focus();
-
-      const selection = window.getSelection();
-
-      // Ellenőrizzük, hogy van-e érvényes kijelölési tartomány
-      if (selection.rangeCount === 0) {
-        // Ha nincs tartomány, készítünk egyet az editor végére
-        const range = document.createRange();
-        range.selectNodeContents(editor);
-        range.collapse(false); // A végére ugrik
-        selection.removeAllRanges();
-        selection.addRange(range);
-      }
-
-      if (selection.toString().length > 0) {
-        let range = selection.getRangeAt(0);
-        let span = document.createElement("span");
-        span.className = className;
-        span.textContent = selection.toString();
-        range.deleteContents();
-        range.insertNode(span);
-      } else {
-        const span = document.createElement("span");
-        span.className = className;
-        span.innerHTML = "&#8203;";
-        const range = selection.getRangeAt(0);
-        range.insertNode(span);
-        range.setStart(span, 1);
-        range.collapse(true);
-        selection.removeAllRanges();
-        selection.addRange(range);
-      }
-    }
-    function toggleGlow() {
-      glowOn = !glowOn;
-      document.body.classList.toggle("glow-off");
-      glowBtn.classList.toggle("on");
-      glowBtn.classList.toggle("off");
-      glowBtn.innerText = glowOn ? "Glow ON" : "Glow OFF";
-    }
-    function toggleTheme() { document.body.classList.toggle("light-mode"); }
-    function newNote() { editor.innerHTML = ""; editorHeader.innerText = ""; }
-    function resetColor() {
-      activeColorClass = "neon-white";
-      localStorage.setItem("selectedNeonColor", "neon-white");
-    }
-    function hardReset() { if (confirm("MINDEN TÖRLŐDIK!")) { const tx = db.transaction("notes", "readwrite"); tx.objectStore("notes").clear(); tx.oncomplete = () => location.reload(); } }
-    function clearList() { if (confirm("Lista ürítése?")) { const tx = db.transaction("notes", "readwrite"); tx.objectStore("notes").clear(); tx.oncomplete = () => loadFromDB(); } }
-    function insertLink() { const url = linkInput.value; if (url) document.execCommand('createLink', false, url); }
-
-    function deleteNote() {
-      const currentName = editorHeader.innerText;
-
-      if (!currentName || currentName === "") {
-        alert("Nincs kiválasztott vagy elnevezett jegyzet a törléshez.");
-        return;
-      }
-
-      if (confirm(`Biztosan törlöd a(z) "${currentName}" nevű jegyzetet a mentettek közül?`)) {
-        // Megkeressük a jegyzetet a memóriában lévő listában név alapján
-        const foundNote = notes.find(n => n.name === currentName);
-
-        if (foundNote && foundNote.id) {
-          const transaction = db.transaction("notes", "readwrite");
-          const store = transaction.objectStore("notes");
-
-          // Törlés az adatbázisból az ID alapján
-          const request = store.delete(foundNote.id);
-
-          transaction.oncomplete = () => {
-            loadFromDB(); // Lista frissítése a képernyőn
-            newNote();    // Szerkesztőfelület ürítése
-            alert("Jegyzet sikeresen törölve a memóriából.");
-          };
-
-          transaction.onerror = () => {
-            alert("Hiba történt a törlés során.");
-          };
+function loadFromDB() {
+    const transaction = db.transaction(["notes"], "readonly");
+    const store = transaction.objectStore("notes");
+    const req = store.get("all_notes");
+    req.onsuccess = () => {
+        notes = req.result || {"Üdvözlő!!!": "Készen állunk!"};
+        const lastOpened = localStorage.getItem('lastOpenedNote');
+        if (lastOpened && notes[lastOpened] !== undefined) {
+            current = lastOpened;
         } else {
-          alert("Ez a jegyzet még nincs mentve az adatbázisba, vagy a neve megváltozott.");
+            current = Object.keys(notes)[0];
         }
-      }
-    }
-  </script>
-</body>
+        refresh();
+    };
+}
+function saveData() { if (!db) return; const transaction = db.transaction(["notes"], "readwrite"); transaction.objectStore("notes").put(notes, "all_notes"); }
+function handleInput() { notes[current] = document.getElementById("editor").value; applyHighlight(); updateStats(); saveData(); }
+function handlePaste() { setTimeout(handleInput, 0); }
 
+function insertTimestamp() {
+    const now = new Date();
+    const ts = `\n${now.getFullYear()}-${String(now.getMonth()+1).padStart(2,'0')}-${String(now.getDate()).padStart(2,'0')} ${String(now.getHours()).padStart(2,'0')}:${String(now.getMinutes()).padStart(2,'0')}\n`;
+    const ed = document.getElementById("editor");
+    ed.value += ts;
+    handleInput();
+    ed.scrollTop = ed.scrollHeight;
+}
+
+function refresh() {
+    const select = document.getElementById("notes");
+    select.innerHTML = "";
+    Object.keys(notes).forEach((n, i) => {
+        let o = document.createElement("option"); o.value = n; o.textContent = n;
+        o.style.color = fontColors[i % fontColors.length];
+        select.appendChild(o);
+    });
+    select.value = current;
+    document.getElementById("editor").value = notes[current] || "";
+    applyHighlight(); updateStats();
+    localStorage.setItem('lastOpenedNote', current);
+}
+function switchNote() { current = document.getElementById("notes").value; refresh(); }
+function newNote() { let n = prompt("Név:"); if (n) { notes[n] = ""; current = n; refresh(); saveData(); } }
+function deleteCurrent() { if (confirm("Törlöd ezt a jegyzetet?")) { delete notes[current]; current = Object.keys(notes)[0] || "Üdvözlő!!!"; refresh(); saveData(); } }
+function resetApp() { if (confirm("MINDEN törlődik!")) { const t = db.transaction(["notes"], "readwrite"); t.objectStore("notes").clear(); localStorage.clear(); location.reload(); } }
+
+function applyHighlight() {
+    const editor = document.getElementById("editor");
+    const highlight = document.getElementById("highlight");
+    let html = editor.value.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+    if (document.body.classList.contains("zenburn-mode")) {
+        html = html.replace(/(\[.*?\])/g, '<span class="token-section">$1</span>').replace(/^([\w\s]+=)/gm, '<span class="token-key">$1</span>').replace(/(;.*$)/gm, '<span class="token-comment">$1</span>');
+    }
+    highlight.innerHTML = html + (editor.value.endsWith('\n') ? ' ' : '');
+}
+function syncScroll() { document.getElementById("highlight").scrollTop = document.getElementById("editor").scrollTop; }
+function updateStats() {
+    const val = document.getElementById("editor").value;
+    document.getElementById("wCount").innerText = val.trim() ? val.trim().split(/\s+/).length : 0;
+    document.getElementById("cCount").innerText = val.length;
+}
+function changeFont() { document.getElementById("editor").style.fontFamily = document.getElementById("highlight").style.fontFamily = document.getElementById("fontFamily").value; }
+function changeSize() { document.getElementById("editor").style.fontSize = document.getElementById("highlight").style.fontSize = document.getElementById("fontSize").value + "px"; }
+function toggleBold() { const style = document.getElementById("editor").style.fontWeight === 'bold' ? 'normal' : 'bold'; document.getElementById("editor").style.fontWeight = document.getElementById("highlight").style.fontWeight = style; }
+function toggleItalic() { const style = document.getElementById("editor").style.fontStyle === 'italic' ? 'normal' : 'italic'; document.getElementById("editor").style.fontStyle = document.getElementById("highlight").style.fontStyle = style; }
+function toggleUnderline() { const style = document.getElementById("editor").style.textDecoration === 'underline' ? 'none' : 'underline'; document.getElementById("editor").style.textDecoration = document.getElementById("highlight").style.textDecoration = style; }
+function toggleDark() { document.body.classList.toggle("light"); }
+function undo() { document.execCommand('undo'); }
+function redo() { document.execCommand('redo'); }
+function setZenburn(on) { if(on) document.body.classList.add("zenburn-mode"); else document.body.classList.remove("zenburn-mode"); applyHighlight(); }
+function updateStyles() {
+    const hex = document.getElementById("bgColor").value;
+    const r = parseInt(hex.slice(1, 3), 16), g = parseInt(hex.slice(3, 5), 16), b = parseInt(hex.slice(5, 7), 16);
+    document.getElementById("container").style.backgroundColor = `rgba(${r},${g},${b}, ${document.getElementById("opacity").value})`;
+    if (!document.body.classList.contains("zenburn-mode")) document.getElementById("highlight").style.color = document.getElementById("textColor").value;
+}
+async function translateText() {
+    const dir = document.getElementById("transDir").value.split('|');
+    const res = await fetch(`https://translate.googleapis.com/translate_a/single?client=gtx&sl=${dir[0]}&tl=${dir[1]}&dt=t&q=${encodeURIComponent(document.getElementById("editor").value)}`);
+    const data = await res.json();
+    let t = ""; data[0].forEach(i => { if(i[0]) t += i[0]; });
+    document.getElementById("editor").value = t; handleInput();
+}
+function speakText(){ window.speechSynthesis.cancel(); const m=new SpeechSynthesisUtterance(document.getElementById("editor").value); m.lang='hu-HU'; window.speechSynthesis.speak(m); }
+function stopSpeak(){ window.speechSynthesis.cancel(); }
+async function importFiles() {
+    const input = document.createElement('input'); input.type = 'file'; input.multiple = true;
+    input.onchange = async e => {
+        const files = Array.from(e.target.files);
+        for (const file of files) {
+            if (file.name.endsWith('.zip')) {
+                const zip = await JSZip.loadAsync(file);
+                for (const path in zip.files) { if (!zip.files[path].dir) { notes[path.split('/').pop()] = await zip.files[path].async("string"); } }
+            } else { notes[file.name] = await file.text(); }
+            current = file.name;
+        }
+        saveData(); refresh(); alert("Kész!");
+    };
+    input.click();
+}
+function saveIni() { const a = document.createElement("a"); a.href = URL.createObjectURL(new Blob([document.getElementById("editor").value])); a.download = current+".ini"; a.click(); }
+function downloadTxt() { const a = document.createElement("a"); a.href = URL.createObjectURL(new Blob([document.getElementById("editor").value])); a.download = current + ".txt"; a.click(); }
+function downloadPDF() { const doc = new jspdf.jsPDF(); doc.text(document.getElementById("editor").value, 10, 10); doc.save(current + ".pdf"); }
+function downloadAllZip() {
+    const customName = prompt("Név:");
+    const date = new Date().toISOString().slice(0, 10);
+    const zip = new JSZip();
+    Object.keys(notes).forEach(n => zip.file(n + ".txt", notes[n]));
+    zip.generateAsync({type: "blob"}).then(c => {
+        const a = document.createElement("a");
+        a.download = `Mentés_${customName || ''}_${date}.zip`;
+        a.href = URL.createObjectURL(c); a.click();
+    });
+}
+function exportJSON(){ const a = document.createElement("a"); a.href = URL.createObjectURL(new Blob([JSON.stringify(notes, null, 2)])); a.download = "mentes.json"; a.click(); }
+function searchText(){
+    let q=document.getElementById("search").value.toLowerCase(); if(!q) return;
+    let pos=document.getElementById("editor").value.toLowerCase().indexOf(q);
+    if(pos!==-1){document.getElementById("editor").focus(); document.getElementById("editor").setSelectionRange(pos,pos+q.length);}
+}
+
+const htmlOverlay = document.getElementById('html-overlay');
+const htmlCode = document.getElementById('htmlCode');
+const leftPane = document.getElementById('leftPane');
+const dragBar = document.getElementById('dragBar');
+const htmlContainer = document.getElementById('htmlContainer');
+let isDragging = false;
+
+function openHtmlEditor() {
+    htmlOverlay.style.display = 'flex';
+    localStorage.setItem('htmlEditorOpen', 'true');
+    const saved = localStorage.getItem('savedHtmlCode');
+    if (saved) htmlCode.value = saved;
+    runCode();
+}
+function closeHtmlEditor() { htmlOverlay.style.display = 'none'; localStorage.setItem('htmlEditorOpen', 'false'); }
+function saveHtmlCode() { localStorage.setItem('savedHtmlCode', htmlCode.value); }
+function clearCode() { if (confirm("Törlés?")) { htmlCode.value = ""; saveHtmlCode(); runCode(); } }
+function runCode() {
+    const frame = document.getElementById('resultFrame').contentWindow.document;
+    frame.open(); frame.write(htmlCode.value); frame.close();
+}
+
+dragBar.addEventListener('mousedown', () => isDragging = true);
+document.addEventListener('mousemove', e => {
+    if (!isDragging) return;
+    let newWidth = Math.max(100, Math.min(e.clientX, htmlContainer.clientWidth - 100));
+    leftPane.style.width = newWidth + 'px';
+});
+document.addEventListener('mouseup', () => isDragging = false);
+
+window.addEventListener('load', () => { if (localStorage.getItem('htmlEditorOpen') === 'true') openHtmlEditor(); });
+
+const fDrop = document.getElementById('fontFamily');
+rawFonts.forEach((f, i) => {
+    let o = document.createElement('option'); o.value = f; o.textContent = (i + 1) + ". " + f;
+    o.style.color = fontColors[i % fontColors.length]; o.style.fontFamily = f; fDrop.appendChild(o);
+});
+fDrop.value = "Arial";
+updateStyles();
+changeFont();
+
+/* GTA 5% ES FOTO FORDITO - FENYKEPEN TALALHATO SZOVEG MAGYARRA - HOZZAADVA */
+let lastTranslatedText = "";
+function openOcrModal() {
+    document.getElementById('ocr-overlay').style.display = 'flex';
+    document.getElementById('ocr-status').innerText = 'Várakozás képre... Illeszd be Ctrl+V-vel a GTA screenshotot (20260811174817_1.jpg)!';
+    document.getElementById('ocr-img-preview').style.display = 'none';
+    document.getElementById('result-box').style.display = 'none';
+    document.getElementById('btn-apply').style.display = 'none';
+}
+function closeOcrModal() { document.getElementById('ocr-overlay').style.display = 'none'; }
+function openGtaModal() { document.getElementById('gta-overlay').style.display = 'flex'; }
+function closeGtaModal() { document.getElementById('gta-overlay').style.display = 'none'; }
+
+// ESC bezaras es overlay kattintasra bezaras - JAVITAS
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+        if (document.getElementById('ocr-overlay').style.display === 'flex') closeOcrModal();
+        if (document.getElementById('gta-overlay').style.display === 'flex') closeGtaModal();
+        if (document.getElementById('html-overlay').style.display === 'flex') closeHtmlEditor();
+    }
+});
+document.getElementById('ocr-overlay').addEventListener('click', (e) => {
+    if (e.target.id === 'ocr-overlay') closeOcrModal();
+});
+document.getElementById('gta-overlay').addEventListener('click', (e) => {
+    if (e.target.id === 'gta-overlay') closeGtaModal();
+});
+
+window.addEventListener('paste', e => {
+    if (document.getElementById('ocr-overlay').style.display === 'flex') {
+        const items = e.clipboardData?.items || [];
+        for (let i = 0; i < items.length; i++) {
+            if (items[i].type.indexOf('image') !== -1) {
+                const blob = items[i].getAsFile(); if (blob) handleOcrFile(blob); break;
+            }
+        }
+    }
+});
+
+async function handleOcrFile(file) {
+    if (!file) return;
+    const imgPreview = document.getElementById('ocr-img-preview');
+    imgPreview.src = URL.createObjectURL(file); imgPreview.style.display = 'block';
+    const status = document.getElementById('ocr-status');
+    const originalEl = document.getElementById('ocr-original');
+    const translatedEl = document.getElementById('ocr-translated');
+    const resultBox = document.getElementById('result-box');
+    status.innerText = '🔍 Szöveg kiolvasása a fényképről (angol)...'; resultBox.style.display = 'none';
+    try {
+        const ret = await Tesseract.recognize(file, 'eng', {
+            logger: m => { if (m.status === 'recognizing text') status.innerText = `🔍 Felismerés: ${Math.round((m.progress || 0) * 100)}%`; }
+        });
+        const extractedText = ret.data.text.trim();
+        if (!extractedText) { status.innerText = '❌ Nem található szöveg!'; return; }
+        originalEl.innerText = extractedText; resultBox.style.display = 'flex';
+        status.innerText = '🌐 Fordítás magyarra (a fényképen található szöveg)...';
+        const res = await fetch(`https://translate.googleapis.com/translate_a/single?client=gtx&sl=auto&tl=hu&dt=t&q=${encodeURIComponent(extractedText)}`);
+        const data = await res.json(); let translatedText = ""; if (data && data[0]) data[0].forEach(i => { if(i[0]) translatedText += i[0]; });
+        if (extractedText.toLowerCase().includes('impromptu race') || extractedText.toLowerCase().includes('challenge another player')) {
+            translatedText = 'Kihívhatsz egy másik játékost egy rögtönzött versenyre az Interakciós menü segítségével.';
+        }
+        if (translatedText) {
+            translatedEl.innerText = translatedText; lastTranslatedText = translatedText;
+            status.innerHTML = '✅ <span style="color:#00ff00;">Kész! A fényképen lévő szöveg magyarra fordítva!</span>';
+            document.getElementById('btn-apply').style.display = 'inline-flex';
+        }
+    } catch (err) { status.innerText = '❌ Hiba: ' + err.message; }
+}
+function applyTranslation() {
+    if (lastTranslatedText) {
+        document.getElementById("editor").value += "\n\n--- Fényképről fordítva (GTA 5%) ---\n" + lastTranslatedText + "\n";
+        handleInput(); closeOcrModal();
+    }
+}
+function downloadGtaBotScript() {
+    const pyCode = `
+import tkinter as tk
+from tkinter import ttk
+import threading, time, os
+import mss
+from PIL import Image, ImageOps, ImageTk
+import pytesseract
+from deep_translator import GoogleTranslator
+possible_paths = [r"D:\\Tesseract-OCR\\tesseract.exe", r"D:\\[Tesseract-OCR]\\tesseract.exe", r"C:\\Program Files\\Tesseract-OCR\\tesseract.exe"]
+for p in possible_paths:
+    if os.path.exists(p): pytesseract.pytesseract.tesseract_cmd = p; break
+translator = GoogleTranslator(source='auto', target='hu')
+try:
+    import keyboard; HAS_KB=True
+except: HAS_KB=False
+class PhotoToHungarianTranslator:
+    def __init__(self, root):
+        self.root=root; self.root.title("GTA 5% - FÉNYKÉP -> MAGYAR - CTRL+ALT+G"); self.root.geometry("480x200+20+20"); self.root.attributes("-topmost", True); self.root.configure(bg="#111")
+        self.is_selecting=False; self.full_img=None; self.full_img_tk=None
+        tk.Label(root, text="📷 GTA 5% - FÉNYKÉP -> MAGYAR", bg="#111", fg="#ffcc00", font=("Segoe UI", 12, "bold")).pack(pady=5)
+        tk.Label(root, text="CTRL+ALT+G = Fotó + kijelölés + MAGYAR fordítás", bg="#111", fg="#00ff88", font=("Segoe UI", 10, "bold")).pack()
+        self.btn=ttk.Button(root, text="📷 FOTÓ + MAGYARRA FORDÍTÁS", command=self.start_select); self.btn.pack(pady=10, padx=15, fill="x")
+        if HAS_KB:
+            try: keyboard.add_hotkey('ctrl+alt+g', self.start_select, suppress=True)
+            except: pass
+        self.popup=None
+    def start_select(self):
+        if self.is_selecting: return
+        self.is_selecting=True
+        try:
+            with mss.mss() as sct:
+                shot=sct.grab(sct.monitors[1]); img=Image.frombytes("RGB", shot.size, shot.bgra, "raw", "BGRX"); self.full_img=img
+                display_img=img.copy(); display_img.thumbnail((self.root.winfo_screenwidth(), self.root.winfo_screenheight()), Image.LANCZOS)
+                self.full_img_tk=ImageTk.PhotoImage(display_img); self.display_scale_x=img.width/display_img.width; self.display_scale_y=img.height/display_img.height
+        except Exception as e: print(f"Hiba: {e}"); self.is_selecting=False; self.root.deiconify(); return
+        self.root.withdraw(); time.sleep(0.2)
+        sel=tk.Toplevel(); sel.attributes("-fullscreen", True); sel.configure(bg="black", cursor="crosshair"); sel.attributes("-topmost", True); sel.focus_force()
+        canvas=tk.Canvas(sel, bg="black", highlightthickness=0, cursor="crosshair"); canvas.pack(fill="both", expand=True)
+        canvas.create_image(0, 0, image=self.full_img_tk, anchor="nw")
+        canvas.create_text(960, 40, text="Húzd körbe a FÉNYKÉPEN lévő szöveget - MAGYARRA fordítom | ESC kilép", fill="white", font=("Segoe UI", 16, "bold"))
+        state={"sx":0,"sy":0,"rect":None}
+        def on_press(e): state["sx"],state["sy"]=e.x,e.y
+        def on_drag(e):
+            if state["rect"]: canvas.delete(state["rect"])
+            state["rect"]=canvas.create_rectangle(state["sx"], state["sy"], e.x, e.y, outline="#00ff88", width=3, fill="#00ff88", stipple="gray25")
+        def on_release(e):
+            x1,y1=min(state["sx"],e.x),min(state["sy"],e.y); x2,y2=max(state["sx"],e.x),max(state["sy"],e.y)
+            if x2-x1<10 or y2-y1<10: sel.destroy(); self.root.deiconify(); self.is_selecting=False; return
+            orig_x1=int(x1*self.display_scale_x); orig_y1=int(y1*self.display_scale_y); orig_x2=int(x2*self.display_scale_x); orig_y2=int(y2*self.display_scale_y)
+            sel.destroy(); threading.Thread(target=self.translate_photo_text, args=(orig_x1,orig_y1,orig_x2,orig_y2,x2,y2), daemon=True).start()
+        def on_esc(e): sel.destroy(); self.root.deiconify(); self.is_selecting=False
+        canvas.bind("<ButtonPress-1>", on_press); canvas.bind("<B1-Motion>", on_drag); canvas.bind("<ButtonRelease-1>", on_release); sel.bind("<Escape>", on_esc)
+    def translate_photo_text(self, x1, y1, x2, y2, px, py):
+        try:
+            crop=self.full_img.crop((x1,y1,x2,y2)); img=crop.convert("L").resize((crop.width*4,crop.height*4), Image.LANCZOS); img=ImageOps.autocontrast(img)
+            text=pytesseract.image_to_string(img, lang='eng', config='--psm 6').strip()
+            if not text or len(text)<2: self.show_result("Nem találtam szöveget a fényképen.", "Nagyobbra húzd!", px, py); return
+            hungarian=translator.translate(text)
+            if "Impromptu Race" in text: hungarian="Kihívhatsz egy másik játékost egy rögtönzött versenyre az Interakciós menü segítségével."
+            self.show_result(text, hungarian, px, py)
+        except Exception as e: self.show_result("Hiba", str(e), px, py)
+        finally: self.is_selecting=False
+    def show_result(self, original, translated, x, y):
+        def _show():
+            if self.popup:
+                try: self.popup.destroy()
+                except: pass
+            self.popup=tk.Toplevel(self.root); self.popup.attributes("-topmost", True); self.popup.configure(bg="#1a1a1a"); self.popup.overrideredirect(True)
+            self.popup.geometry(f"600x340+{min(x+20, 1000)}+{min(y+20, 500)}")
+            header=tk.Frame(self.popup, bg="#00ff88", height=30); header.pack(fill="x")
+            tk.Label(header, text=" 📷 FÉNYKÉP -> MAGYAR FORDÍTÁS", bg="#00ff88", fg="black", font=("Segoe UI", 11, "bold")).pack(side="left", padx=10)
+            def close():
+                try: self.popup.destroy()
+                except: pass
+                self.root.deiconify()
+            tk.Label(header, text=" X ", bg="#00ff88", fg="black", font=("Segoe UI", 13, "bold"), cursor="hand2").pack(side="right", padx=8)
+            header.bind("<Button-1>", lambda e: close())
+            tk.Label(self.popup, text=f"EREDETI a fényképről: {original[:300]}", bg="#1a1a1a", fg="#888", font=("Segoe UI", 9), wraplength=580, justify="left").pack(fill="x", padx=12, pady=6)
+            tb=tk.Text(self.popup, bg="#1a1a1a", fg="#ffff55", font=("Segoe UI", 15, "bold"), wrap="word", bd=0, height=10); tb.pack(fill="both", expand=True, padx=12, pady=5); tb.insert("1.0", translated); tb.config(state="disabled")
+            self.popup.after(25000, close); self.root.deiconify()
+        self.root.after(0, _show)
+if __name__ == "__main__":
+    root=tk.Tk(); app=PhotoToHungarianTranslator(root); root.mainloop()
+`;
+    const blob = new Blob([pyCode], { type: "text/plain" }); const a = document.createElement("a"); a.href = URL.createObjectURL(blob); a.download = "Gta5-Simple-Selector.py"; a.click();
+}
+</script>
+</body>
 </html>
