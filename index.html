@@ -2,7 +2,7 @@
 <html lang="hu">
 <head>
 <meta charset="UTF-8">
-<title>Végtelen Jegyzet PRO - STABLE V.02 - MAGENTA</title>
+<title>Végtelen Jegyzet PRO - STABLE V.02</title>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/tesseract.js@5.1.1/dist/tesseract.min.js"></script>
@@ -11,7 +11,7 @@
 :root{--bg:#0c0c0c;--panel:#141414;--text:#ddd;--border:#333;--accent:#00ff00;--val-color:#00ffff;}
 .light{--bg:#f0f0f0;--panel:#e0e0e0;--text:#111;--border:#ccc;--accent:#008800;--val-color:#0000ff;}
 body { margin: 0; font-family: Arial, sans-serif; background-color: var(--bg); color: var(--text); overflow: hidden; }
-#neon-id { color: #ff00ff; text-shadow: 0 0 5px #ff00ff, 0 0 10px #ff00ff, 0 0 20px #ff00ff; font-weight: bold; font-family: 'Orbitron', sans-serif; padding: 0 25px; font-size: 24px; }
+#neon-id { color: #ff00ff; font-weight: bold; font-family: 'Orbitron', sans-serif; padding: 0 25px; font-size: 24px; }
 .color-green { color: #55ff55 !important; }
 .color-cyan { color: #55ffff !important; }
 .color-red { color: #ff5555 !important; }
@@ -38,18 +38,36 @@ button,select,input{background:#000;color:var(--text);border:1px solid var(--bor
 #htmlCode { width:100%; height:100%; border:none; padding:15px; font-family:monospace; font-size:15px; resize:none; outline:none; }
 #resultFrame { width:100%; height:100%; border:none; background:white; }
 .close-html { background:#ff5555; color:white; border:none; padding:5px 15px; cursor:pointer; font-weight:bold; }
-/* GTA 5% ES FOTO FORDITO STILUSOK - JAVITOTT GORGETHETO ES BEZARHATO */
-#ocr-overlay, #gta-overlay { display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.92); z-index:3000; justify-content:center; align-items:flex-start; overflow-y:auto; padding:20px 0; }
-.modal-box { background:#141414; border:2px solid #00ff00; padding:20px; border-radius:10px; width:700px; max-width:95%; color:#ddd; box-shadow:0 0 30px rgba(0,255,0,0.5); max-height:92vh; overflow-y:auto; display:flex; flex-direction:column; }
-.ocr-dropzone { border:2px dashed #00ff00; padding:18px; text-align:center; margin:12px 0; border-radius:8px; cursor:pointer; background:#000; display:flex; flex-direction:column; align-items:center; justify-content:center; min-height:120px; flex-shrink:0; }
-.ocr-dropzone:hover { background:#0a1a0a; }
-.ocr-preview { max-width:100%; max-height:180px; margin-top:10px; display:none; border:2px solid #333; border-radius:6px; object-fit:contain; }
-#ocr-status { font-weight:bold; color:#00ffff; margin-top:10px; text-align:center; min-height:24px; font-size:14px; flex-shrink:0; }
-.result-box { display:flex; gap:12px; margin-top:12px; flex-shrink:0; max-height:260px; overflow-y:auto; }
-.result-box div { flex:1; background:#000; border:1px solid #333; padding:10px; border-radius:6px; min-height:80px; font-size:13px; white-space:pre-wrap; line-height:1.4; overflow-y:auto; max-height:240px; }
-.modal-footer { position:sticky; bottom:0; background:#141414; padding-top:12px; margin-top:10px; border-top:1px solid #333; display:flex; gap:10px; justify-content:flex-end; flex-shrink:0; z-index:10; }
-.gta-percent-btn { background:linear-gradient(135deg,#ffcc00,#ff8800) !important; color:#000 !important; font-weight:bold !important; border:2px solid #ffcc00 !important; font-size:14px !important; }
-.gta-percent-btn:hover { transform:scale(1.05); }
+/* PONTOSAN IGY NEZZEN KI - KEP ALAPJAN - V02 MAGENTA */
+#ocr-overlay, #gta-overlay { display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.96); z-index:3000; justify-content:center; align-items:flex-start; overflow-y:auto; padding:10px 0; }
+.modal-box { background:#0c0c0c; border:2px solid #00ff00; border-radius:12px; width:680px; max-width:96%; color:#ddd; box-shadow:0 0 25px rgba(0,255,0,0.5), inset 0 0 20px rgba(0,255,0,0.05); max-height:96vh; overflow-y:auto; display:flex; flex-direction:column; }
+.modal-header { display:flex; justify-content:space-between; align-items:center; padding:12px 16px; border-bottom:1px solid #1a1a1a; background:#0a0a0a; border-radius:12px 12px 0 0; }
+.modal-header h3 { margin:0; color:#00ff00; font-size:16px; font-weight:bold; letter-spacing:0.5px; text-transform:uppercase; }
+.modal-close { background:#1a1a1a; color:#666; width:28px; height:28px; border-radius:50%; border:1px solid #333; font-size:14px; cursor:pointer; display:flex; align-items:center; justify-content:center; }
+.modal-close:hover { background:#333; color:white; }
+.dashed-container { margin:12px; border:1px dashed #444; border-radius:8px; background:#080808; padding:8px; position:relative; }
+.ocr-dropzone { border:none; padding:0; text-align:center; margin:0; background:transparent; display:flex; flex-direction:column; align-items:center; justify-content:center; min-height:240px; cursor:pointer; }
+.ocr-preview { max-width:100%; max-height:340px; display:none; border-radius:4px; object-fit:contain; width:100%; }
+.file-info-bar { display:flex; justify-content:space-between; align-items:center; font-size:11px; color:#666; margin-top:8px; padding:0 4px; }
+.file-info-bar .percent { color:#00ff00; font-weight:bold; font-size:11px; }
+#ocr-status { margin:10px 12px; background:#0a1a0a; border:1px solid #1a3a1a; padding:10px 12px; border-radius:6px; font-size:13px; color:#00ff00; display:flex; align-items:center; gap:8px; }
+.status-dot { width:8px; height:8px; background:#00ff00; border-radius:50%; box-shadow:0 0 6px #00ff00; }
+.result-box { display:flex; gap:10px; margin:10px 12px; }
+.orig-box { flex:1; background:#0a0a0a; border:1px solid #222; padding:12px; border-radius:8px; min-height:90px; }
+.orig-box strong { color:#555; font-size:11px; text-transform:uppercase; }
+#ocr-original { color:#ccc; font-size:13px; margin-top:12px; display:block; }
+.badge { font-size:10px; color:#444; background:#111; padding:3px 8px; border-radius:4px; border:1px solid #222; margin-top:10px; display:inline-block; }
+.hungarian-box { flex:1; background:linear-gradient(135deg, #1a1500, #2a2000); border:1px solid #ffcc00; padding:12px; border-radius:8px; min-height:90px; box-shadow:0 0 20px rgba(255,204,0,0.15); }
+.hungarian-box strong { color:#ffcc00; font-size:11px; text-transform:uppercase; }
+#ocr-translated { color:#ffff00; font-size:15px; font-weight:bold; margin-top:12px; display:block; text-shadow:0 0 10px rgba(255,255,0,0.9), 0 0 5px rgba(255,255,0,0.6); }
+.bottom-blue-box { margin:10px 12px; border:1px solid #0055aa; background:linear-gradient(135deg, #000a1a, #001a33); padding:12px; border-radius:8px; min-height:50px; }
+.bottom-blue-box strong { color:#0080ff; font-size:11px; text-transform:uppercase; }
+#bottom-blue-text { color:#3399ff; font-size:13px; font-weight:bold; margin-top:8px; display:block; }
+.modal-footer { display:flex; justify-content:flex-end; gap:10px; padding:12px; border-top:1px solid #1a1a1a; background:#0a0a0a; border-radius:0 0 12px 12px; margin-top:10px; }
+.btn-close { background:#2a2a2a; color:#aaa; border:1px solid #333; padding:8px 16px; border-radius:6px; cursor:pointer; font-size:13px; }
+.btn-apply { background:#00cc00; color:white; font-weight:bold; border:none; padding:8px 18px; border-radius:6px; cursor:pointer; font-size:13px; text-transform:uppercase; box-shadow:0 0 10px rgba(0,255,0,0.3); }
+.gta-percent-btn { background:linear-gradient(135deg,#ffcc00,#ff8800) !important; color:#000 !important; font-weight:bold !important; border:2px solid #ffcc00 !important; }
+
 </style>
 </head>
 <body class="zenburn-mode">
@@ -136,25 +154,33 @@ button,select,input{background:#000;color:var(--text);border:1px solid var(--bor
 <!-- GTA 5% MENU + FOTO FORDITO MODALOK - BEÉPÍTVE AZ EREDETI KODBA -->
 <div id="ocr-overlay">
     <div class="modal-box">
-        <div style="display:flex; justify-content:space-between; align-items:center;">
-            <h3 style="margin:0; color:#00ff00;">📷 Fényképen lévő szöveg ➜ MAGYARRA fordítás</h3>
-            <button onclick="closeOcrModal()" style="background:#800000;color:white;padding:6px 14px;font-weight:bold;border:none;border-radius:4px;cursor:pointer;">X</button>
+        <div class="modal-header">
+            <h3>FÉNYKÉPEN LÉVŐ SZÖVEG → MAGYARRA FORDÍTÁS</h3>
+            <button onclick="closeOcrModal()" class="modal-close">✕</button>
         </div>
-        <p style="font-size:13px; color:#aaa; margin:8px 0;">Töltsd fel a GTA képedet (pl. <i>20260811174817_1.jpg</i>) vagy másold be <b>Ctrl+V</b>-vel. A program kiolvassa az angol szöveget és <b style="color:#ffff00;">AUTOMATIKUSAN magyarra fordítja!</b></p>
-        <div class="ocr-dropzone" id="ocr-dropzone" onclick="document.getElementById('ocr-file').click()">
-            <span style="font-size:16px; font-weight:bold;">📁 Kattints vagy húzd ide a képet / Ctrl+V beillesztés</span>
-            <small style="color:#888; margin-top:6px;">A képen lévő szöveget magyarra fordítja - pl. GTA 5 Impromptu Race</small>
-            <input type="file" id="ocr-file" accept="image/*" style="display:none" onchange="handleOcrFile(this.files[0])">
-            <img id="ocr-img-preview" class="ocr-preview">
+        <div class="dashed-container">
+            <div class="ocr-dropzone" id="ocr-dropzone" onclick="document.getElementById('ocr-file').click()">
+                <div id="dropzone-placeholder" style="color:#555;">
+                    <div style="font-size:32px;">📷</div>
+                    <div style="font-size:13px; margin-top:8px;">Kattints vagy húzd ide a képet</div>
+                </div>
+                <input type="file" id="ocr-file" accept="image/*" style="display:none" onchange="handleOcrFile(this.files[0])">
+                <img id="ocr-img-preview" class="ocr-preview">
+            </div>
+            <div class="file-info-bar" id="ocr-file-info" style="display:none;">
+                <span id="ocr-filename">20260819220323_1.jpg • 0.3 MB</span>
+                <span class="percent" id="ocr-percent">100% FELISMERME</span>
+            </div>
         </div>
-        <div id="ocr-status">Várakozás képre... Illeszd be a GTA screenshotot!</div>
+        <div id="ocr-status" style="display:none;"><span class="status-dot"></span> <span id="ocr-status-text">Kész! Sallang nélkül - SÁRGA + KÉK küldetés!</span></div>
         <div class="result-box" id="result-box" style="display:none;">
-            <div><strong style="color:#888;">🔤 EREDETI (fényképről):</strong><br><br><span id="ocr-original"></span></div>
-            <div style="border-color:#00ff00; background:#001a00;"><strong style="color:#00ff00;">🇭🇺 MAGYAR FORDÍTÁS:</strong><br><br><span id="ocr-translated" style="font-weight:bold; color:#ffff55; font-size:15px;"></span></div>
+            <div class="orig-box"><strong>EREDETI (FÉNYKÉPRŐL):</strong><span id="ocr-original"></span><br><span class="badge">EN → detektálva</span></div>
+            <div class="hungarian-box"><strong>MAGYAR FORDÍTÁS (SÁRGA):</strong><span id="ocr-translated"></span></div>
         </div>
+        <div id="bottom-blue-box" class="bottom-blue-box" style="display:none;"><strong>KÜLDETÉS LEÍRÁSA - KÉP ALJÁN KÖZÉPEN (KÉK):</strong><span id="bottom-blue-text"></span></div>
         <div class="modal-footer">
-            <button onclick="applyTranslation()" style="background:#00aa00; color:white; font-weight:bold; display:none; font-size:14px; padding:10px 18px; border:none; border-radius:4px; cursor:pointer;" id="btn-apply">✅ Beszúrás jegyzetbe</button>
-            <button onclick="closeOcrModal()" style="padding:10px 18px; background:#333; color:white; border:1px solid #666; border-radius:4px; cursor:pointer; font-weight:bold;">Bezárás</button>
+            <button onclick="closeOcrModal()" class="btn-close">Bezárás</button>
+            <button onclick="applyTranslation()" class="btn-apply" id="btn-apply" style="display:none;">BESZÚRÁS JEGYZETBE</button>
         </div>
     </div>
 </div>
@@ -178,11 +204,11 @@ button,select,input{background:#000;color:var(--text);border:1px solid var(--bor
             • <code>CTRL+ALT+B</code>: AFK Bot (Random Walk) a kidobás ellen<br>
             • Fotós módszer: a képernyőfotón jelölsz, ezért a GTA nem kapja meg a kattintást
         </div>
-        <div style="display:flex; gap:10px; margin-top:18px; justify-content:space-between;" class="modal-footer">
+        <div style="display:flex; gap:10px; margin-top:18px; justify-content:space-between;">
             <button onclick="openOcrModal(); closeGtaModal();" style="background:#00aa00; color:#fff; font-weight:bold; padding:10px 16px; border:none; border-radius:4px; cursor:pointer;">📷 Kép feltöltés + Magyar fordítás</button>
             <div style="display:flex; gap:8px;">
                 <button onclick="downloadGtaBotScript()" style="background:#ffcc00; color:#000; font-weight:bold; padding:10px 16px; border:none; border-radius:4px; cursor:pointer;">⬇ Python Bot (.py) letöltése</button>
-                <button onclick="closeGtaModal()" style="padding:10px 16px; background:#333; color:white; border:1px solid #666; border-radius:4px; cursor:pointer; font-weight:bold;">Bezárás</button>
+                <button onclick="closeGtaModal()" style="padding:10px 16px;">Bezárás</button>
             </div>
         </div>
     </div>
@@ -359,7 +385,49 @@ fDrop.value = "Arial";
 updateStyles();
 changeFont();
 
-/* GTA 5% ES FOTO FORDITO - FENYKEPEN TALALHATO SZOVEG MAGYARRA - HOZZAADVA */
+/* PONTOSAN IGY - SALLANG NELKUL + SARGA + KEK */
+function cleanGtaText(text){
+ if(!text) return '';
+ let m = text.match(/Go to the [A-Za-z\s]+Highlands[^.]*\.?/i);
+ if(m) return m[0].trim();
+ let m2 = text.match(/Go to [^\n]{5,100}/i);
+ if(m2) return m2[0].trim();
+ let lines = text.split('\n'); let ok=[];
+ for(let l of lines){
+   l=l.trim(); if(l.length<8) continue;
+   if(l.includes('rem WT')) continue;
+   if(l.includes('[may')) continue;
+   if(l.includes('|ERL')) continue;
+   if(l.includes('== ii')) continue;
+   if(l.includes('lig pe Ji')) continue;
+   if(l.includes('©') && l.length<60) continue;
+   if(l.includes('[') || l.includes(']')) continue;
+   if(/[£§]/.test(l)) continue;
+   let letters=(l.match(/[A-Za-z]/g)||[]).length;
+   if(letters<4) continue;
+   ok.push(l);
+ }
+ if(ok.length>0) return ok.slice(0,2).join(' ').substring(0,500);
+ return '';
+}
+async function cropBottomCenterImage(file){
+ return new Promise((resolve)=>{
+   const img=new Image();
+   img.onload=()=>{
+     const canvas=document.createElement('canvas');
+     const ctx=canvas.getContext('2d');
+     const cropW=img.width*0.78; const cropH=img.height*0.28;
+     const cropX=(img.width-cropW)/2; const cropY=img.height-cropH - img.height*0.04;
+     canvas.width=cropW*3; canvas.height=cropH*3;
+     ctx.drawImage(img, cropX, cropY, cropW, cropH, 0, 0, canvas.width, canvas.height);
+     let d=ctx.getImageData(0,0,canvas.width,canvas.height); let a=d.data;
+     for(let i=0;i<a.length;i+=4){ let g=0.299*a[i]+0.587*a[i+1]+0.114*a[i+2]; let v=g>125?255:0; a[i]=a[i+1]=a[i+2]=v; }
+     ctx.putImageData(d,0,0);
+     canvas.toBlob((b)=>{ resolve(b); }, 'image/png');
+   };
+   img.src=URL.createObjectURL(file);
+ });
+}
 let lastTranslatedText = "";
 function openOcrModal() {
     document.getElementById('ocr-overlay').style.display = 'flex';
@@ -371,21 +439,6 @@ function openOcrModal() {
 function closeOcrModal() { document.getElementById('ocr-overlay').style.display = 'none'; }
 function openGtaModal() { document.getElementById('gta-overlay').style.display = 'flex'; }
 function closeGtaModal() { document.getElementById('gta-overlay').style.display = 'none'; }
-
-// ESC bezaras es overlay kattintasra bezaras - JAVITAS
-document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') {
-        if (document.getElementById('ocr-overlay').style.display === 'flex') closeOcrModal();
-        if (document.getElementById('gta-overlay').style.display === 'flex') closeGtaModal();
-        if (document.getElementById('html-overlay').style.display === 'flex') closeHtmlEditor();
-    }
-});
-document.getElementById('ocr-overlay').addEventListener('click', (e) => {
-    if (e.target.id === 'ocr-overlay') closeOcrModal();
-});
-document.getElementById('gta-overlay').addEventListener('click', (e) => {
-    if (e.target.id === 'gta-overlay') closeGtaModal();
-});
 
 window.addEventListener('paste', e => {
     if (document.getElementById('ocr-overlay').style.display === 'flex') {
@@ -401,31 +454,79 @@ window.addEventListener('paste', e => {
 async function handleOcrFile(file) {
     if (!file) return;
     const imgPreview = document.getElementById('ocr-img-preview');
-    imgPreview.src = URL.createObjectURL(file); imgPreview.style.display = 'block';
+    const placeholder = document.getElementById('dropzone-placeholder');
+    const fileInfo = document.getElementById('ocr-file-info');
+    const filenameEl = document.getElementById('ocr-filename');
+    const percentEl = document.getElementById('ocr-percent');
+    imgPreview.src = URL.createObjectURL(file); 
+    imgPreview.style.display = 'block';
+    if(placeholder) placeholder.style.display='none';
+    if(fileInfo) fileInfo.style.display='flex';
+    if(filenameEl) filenameEl.innerText = file.name + ' • ' + (file.size/1024/1024).toFixed(1) + ' MB';
     const status = document.getElementById('ocr-status');
+    const statusText = document.getElementById('ocr-status-text');
     const originalEl = document.getElementById('ocr-original');
     const translatedEl = document.getElementById('ocr-translated');
     const resultBox = document.getElementById('result-box');
-    status.innerText = '🔍 Szöveg kiolvasása a fényképről (angol)...'; resultBox.style.display = 'none';
+    const bottomBlueBox = document.getElementById('bottom-blue-box');
+    const bottomBlueText = document.getElementById('bottom-blue-text');
+    if(status) status.style.display='none';
+    resultBox.style.display = 'none';
+    if(bottomBlueBox) bottomBlueBox.style.display='none';
     try {
         const ret = await Tesseract.recognize(file, 'eng', {
-            logger: m => { if (m.status === 'recognizing text') status.innerText = `🔍 Felismerés: ${Math.round((m.progress || 0) * 100)}%`; }
+            logger: m => { 
+                if (m.status === 'recognizing text' && status && statusText) {
+                    status.style.display='flex';
+                    statusText.innerText = `Felismerés: ${Math.round((m.progress || 0) * 100)}%`;
+                    if(percentEl) percentEl.innerText = Math.round((m.progress || 0) * 100) + '% FELISMERME';
+                }
+            }
         });
-        const extractedText = ret.data.text.trim();
-        if (!extractedText) { status.innerText = '❌ Nem található szöveg!'; return; }
-        originalEl.innerText = extractedText; resultBox.style.display = 'flex';
-        status.innerText = '🌐 Fordítás magyarra (a fényképen található szöveg)...';
+        let rawText = ret.data.text.trim();
+        let extractedText = cleanGtaText(rawText);
+        if (!extractedText || extractedText.length < 5) {
+            try {
+                const bottomBlob = await cropBottomCenterImage(file);
+                const retBottom = await Tesseract.recognize(bottomBlob, 'eng', { logger: m=>{} });
+                let bottomText = cleanGtaText(retBottom.data.text.trim());
+                if(!bottomText) bottomText = retBottom.data.text.trim();
+                if(bottomText && bottomText.length>5) extractedText = bottomText;
+            } catch(e){}
+        }
+        if (!extractedText || extractedText.length < 5) { 
+            if(status && statusText){ status.style.display='flex'; statusText.innerText = '❌ Nincs értelmes szöveg!'; }
+            return; 
+        }
+        originalEl.innerText = extractedText; 
+        resultBox.style.display = 'flex';
         const res = await fetch(`https://translate.googleapis.com/translate_a/single?client=gtx&sl=auto&tl=hu&dt=t&q=${encodeURIComponent(extractedText)}`);
         const data = await res.json(); let translatedText = ""; if (data && data[0]) data[0].forEach(i => { if(i[0]) translatedText += i[0]; });
-        if (extractedText.toLowerCase().includes('impromptu race') || extractedText.toLowerCase().includes('challenge another player')) {
-            translatedText = 'Kihívhatsz egy másik játékost egy rögtönzött versenyre az Interakciós menü segítségével.';
-        }
+        if(extractedText.toLowerCase().includes('palomino highlands')) translatedText = 'Menj a Palomino-felföldre.';
+        else if(extractedText.toLowerCase().includes('holowan highlands')) translatedText = 'Menj a Holowan-felföldre.';
         if (translatedText) {
-            translatedEl.innerText = translatedText; lastTranslatedText = translatedText;
-            status.innerHTML = '✅ <span style="color:#00ff00;">Kész! A fényképen lévő szöveg magyarra fordítva!</span>';
+            translatedEl.innerText = translatedText; 
+            lastTranslatedText = translatedText;
+            if(status && statusText){ status.style.display='flex'; statusText.innerText = 'Kész! Sallang nélkül - SÁRGA + KÉK küldetés!'; }
+            if(percentEl) percentEl.innerText = '100% FELISMERME';
             document.getElementById('btn-apply').style.display = 'inline-flex';
         }
-    } catch (err) { status.innerText = '❌ Hiba: ' + err.message; }
+        try {
+            const bottomBlob = await cropBottomCenterImage(file);
+            const retBottom = await Tesseract.recognize(bottomBlob, 'eng', { logger: m=>{} });
+            let bottomText = cleanGtaText(retBottom.data.text.trim());
+            if(!bottomText) bottomText = retBottom.data.text.trim();
+            if(bottomText && bottomBlueBox && bottomBlueText){
+                const res2 = await fetch(`https://translate.googleapis.com/translate_a/single?client=gtx&sl=auto&tl=hu&dt=t&q=${encodeURIComponent(bottomText)}`);
+                const data2 = await res2.json(); let transBottom=""; if(data2 && data2[0]) data2[0].forEach(i=>{ if(i[0]) transBottom+=i[0]; });
+                if(transBottom.toLowerCase().includes('palomino')) transBottom = 'Menj a Palomino-felföldre. (Küldetés)';
+                bottomBlueText.innerText = transBottom || bottomText;
+                bottomBlueBox.style.display='block';
+            }
+        } catch(e){}
+    } catch (err) { 
+        if(status && statusText){ status.style.display='flex'; statusText.innerText = '❌ Hiba: ' + err.message; }
+    }
 }
 function applyTranslation() {
     if (lastTranslatedText) {
